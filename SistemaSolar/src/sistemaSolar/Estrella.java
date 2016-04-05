@@ -5,10 +5,16 @@
  */
 package sistemaSolar;
 
+import javax.media.j3d.Material;
+
 /**
  *
  * @author jgallardo
  */
 public class Estrella extends Astro{
+    
+    public Estrella(double radio, double distancia, String archivo_textura, String nombre, Material material) {
+        super(radio, distancia, archivo_textura, nombre, material);
+    }
     
 }
