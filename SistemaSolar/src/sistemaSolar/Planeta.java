@@ -36,6 +36,7 @@ public class Planeta extends Astro{
     
     public void addSatelite(Satelite s){
         satelites.put(s.getNombre(),s);
+        s.setPlaneta(this);
     }
     
     public boolean hasSatelites(){
