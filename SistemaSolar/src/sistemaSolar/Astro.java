@@ -56,10 +56,6 @@ public abstract class Astro {
         this.t_traslacion = traslacion;
     }
     
-    public double getRadio(){
-        return radio;
-    }
-    
     public String getNombre(){
         return nombre;
     }
@@ -79,5 +75,5 @@ public abstract class Astro {
     public void desplaza(float x, float y, float z){
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
-    
+   
 }
