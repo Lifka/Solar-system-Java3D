@@ -7,11 +7,15 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.image.TextureLoader;
+import com.sun.j3d.utils.universe.ViewingPlatform;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
+import javax.media.j3d.TransformGroup;
 
 public class Universo {
     private Nave nave;
@@ -93,7 +97,7 @@ public class Universo {
         BranchGroup planetas = new BranchGroup();
         
         // Enganchar los planetas al universo
-        universe.addBranchGraph(planetas);
+        addBranchGraph(planetas);
         
         /*************/
         /* PLANETAS */
@@ -130,4 +134,5 @@ public class Universo {
         //conjuntoTierra.setTransform(Transformacion);
         
     }
+
 }

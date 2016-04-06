@@ -24,8 +24,8 @@ public class Prueba {
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Visualization visualizationWindows = new Visualization(canvas);
         
-        Universo universe = new Universo(canvas);
-        universe.getViewingPlatform().setNominalViewingTransform();
+        Universo universe = new Universo(new String(), canvas);
+        //universe.getViewingPlatform().setNominalViewingTransform();
         
         Appearance apariencia = new Appearance();
         
