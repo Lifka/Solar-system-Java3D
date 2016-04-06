@@ -63,7 +63,17 @@ public class Universo {
         
         // SATÉLITES
         String dir_text_sat = "texturas_satelites/";
-        Astro luna = new Satelite("Luna", 1737, 0, dir_text_sat, new Material());
+        
+        Astro luna = new Satelite("Luna", 1737, 370300, dir_text_sat + "luna.jpg", new Material(),Color.white, 27.32, 27.32);
+        astros.put(luna.getNombre(), luna);
+        
+        Astro fobos = new Satelite("Fobos", 11, 9380, dir_text_sat + "fobos.jpg", new Material(), Color.white, 0.3 , 0.3);
+        astros.put(fobos.getNombre(), fobos);
+        
+        Astro deimos = new Satelite("Deimos",7,23460, dir_text_sat + "deimos.jpg", new Material(), Color.white, 1.25,1.25); 
+        astros.put(deimos.getNombre(), deimos);
+        
+        Astro io = new Satelite("Io",1820,422000, dir_text_sat + "io.jpg", new Material(), Color.white, 1,1);
         
     }
 }
