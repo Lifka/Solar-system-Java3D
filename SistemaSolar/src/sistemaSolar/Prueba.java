@@ -12,6 +12,7 @@ import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.PolygonAttributes;
+import javax.media.j3d.TransformGroup;
 
 public class Prueba {
 
@@ -27,6 +28,26 @@ public class Prueba {
         universe.getViewingPlatform().setNominalViewingTransform();
         
         Appearance apariencia = new Appearance();
+        
+        // Branch de planetas
+        BranchGroup planetas = new BranchGroup ( ) ;
+        
+        // Enganchar los planetas al universo
+        universe.addBranchGraph(planetas);
+        
+        // Mercurio es transformable
+        TransformGroup conjuntoMercurio = new TransformGroup ();
+        conjuntoMercurio.setCapability(TransformGroup .ALLOW_TRANSFORM_WRITE);
+        
+        // Enganchar conjuntoMercurio del branch de planetas
+        planetas.addChild(conjuntoMercurio);
+        //conjuntoMercurio.setTransform(Transformacion);
+        
+        
+        
+      /*  
+        
+        
         apariencia.setPolygonAttributes(new PolygonAttributes(
                 PolygonAttributes.POLYGON_LINE,
                 PolygonAttributes.CULL_BACK,1.5f
@@ -37,7 +58,10 @@ public class Prueba {
         BranchGroup root = new BranchGroup();
         root.addChild(esfera);
         universe.addBranchGraph(root);
-        visualizationWindows.setVisible(true);
+        visualizationWindows.setVisible(true);*/
+      
+      
+      
     }
     
 }
