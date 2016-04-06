@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+    Gallardo Morales, Juan Carlos - jcgallardomorales@gmail.com
+    Izquierdo Vera, Javier - javieriizquierdovera@gmail.com
+
  */
 package sistemaSolar;
 
@@ -10,14 +11,11 @@ import java.awt.Container;
 import javax.media.j3d.Canvas3D;
 import javax.swing.JFrame;
 
-/**
- *
- * @author jgallardo
- */
+
 public class Visualization extends JFrame {
     public Visualization(Canvas3D canvas){
       
-        setTitle("Java3D");
+        setTitle("Sistema Solar Java3D");
         setSize(700,700);
         setLocation(100,100);
         

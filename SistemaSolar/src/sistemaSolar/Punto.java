@@ -1,14 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+    Gallardo Morales, Juan Carlos - jcgallardomorales@gmail.com
+    Izquierdo Vera, Javier - javieriizquierdovera@gmail.com
+
  */
 package sistemaSolar;
 
-/**
- *
- * @author jgallardo
- */
 public class Punto {
     
 }
