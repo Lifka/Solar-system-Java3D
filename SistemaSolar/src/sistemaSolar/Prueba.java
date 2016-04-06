@@ -30,7 +30,7 @@ public class Prueba {
         Appearance apariencia = new Appearance();
         
         // Branch de planetas
-        BranchGroup planetas = new BranchGroup ( ) ;
+        BranchGroup planetas = new BranchGroup();
         
         // Enganchar los planetas al universo
         universe.addBranchGraph(planetas);

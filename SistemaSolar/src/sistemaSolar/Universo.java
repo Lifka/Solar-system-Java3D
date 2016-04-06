@@ -7,18 +7,21 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.image.TextureLoader;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
 
 public class Universo {
     private Nave nave;
-    private ArrayList<Astro> astros;
+    private HashMap<String,Astro> astros;
     private Texture textura;
     
     public Universo (String archivo_text){
         this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
-        this.astros = null;
+        this.astros = new HashMap<String,Astro>();
     }
     
     public int getNumComponentes(){
@@ -36,19 +39,31 @@ public class Universo {
         this.nave = nave;
     }
 
-    public ArrayList<Astro> getAstros() {
+    public HashMap<String,Astro> getAstros() {
         return astros;
     }
 
-    public void setAstros(ArrayList<Astro> astros) {
+    public void setAstros(HashMap<String,Astro> astros) {
         this.astros = astros;
     }
     
     public void addAstro(Astro ast){
-        astros.add(ast);
+        astros.put(ast.getNombre(),ast);
     }
     
     public int numAstros(){
         return astros.size();
+    }
+    
+    public void crearSistemaSolar(){
+        // ESTRELLAS --> SOL
+        String dir_text_sol = "texturas_estrellas/";
+        Astro sol = new Estrella("Sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
+        astros.put(sol.getNombre(),sol);
+        
+        // SATÉLITES
+        String dir_text_sat = "texturas_satelites/";
+        Astro luna = new Satelite("Luna", 1737, 0, dir_text_sat, new Material());
+        
     }
 }

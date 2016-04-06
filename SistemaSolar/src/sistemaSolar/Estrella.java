@@ -15,13 +15,13 @@ public class Estrella extends Astro{
     private double luminosidad;
     private ArrayList<Planeta> planetas;
     
-    public Estrella(String nombre, double radio, double distancia, Punto p, String archivo_textura, Material material, Color c, double rotacion, double luminosidad) {
-        super(nombre, radio, distancia, p, archivo_textura, material, c, rotacion, 0.0);
+    public Estrella(String nombre, double radio, double distancia, String archivo_textura, Material material, Color c, double rotacion, double luminosidad) {
+        super(nombre, radio, distancia, archivo_textura, material, c, rotacion, 0.0);
         this.luminosidad = luminosidad;
     }
     
-    public Estrella (String nombre, double radio, double distancia, Punto p, double luminosidad){
-        super(nombre,radio,distancia,p);
+    public Estrella (String nombre, double radio, double distancia, double luminosidad){
+        super(nombre,radio,distancia);
         this.luminosidad = luminosidad;
     }
   

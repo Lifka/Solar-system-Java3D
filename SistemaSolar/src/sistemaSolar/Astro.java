@@ -25,21 +25,19 @@ public abstract class Astro {
     
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
-    public Astro(String nombre, double radio, double distancia, Punto posicion){
+    public Astro(String nombre, double radio, double distancia){
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
-        this.posicion = posicion;
     }
     
-    public Astro(String nombre, double radio, double distancia, Punto posicion,
+    public Astro(String nombre, double radio, double distancia,
             String archivo_textura, Material material, Color color,
             double rotacion, double traslacion){
         
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
-        this.posicion = posicion;
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
         
