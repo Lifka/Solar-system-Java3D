@@ -13,8 +13,10 @@ import javax.media.j3d.Material;
  */
 public class Estrella extends Astro{
     
-    public Estrella(double radio, double distancia, String archivo_textura, String nombre, Material material) {
-        super(radio, distancia, archivo_textura, nombre, material);
+    public Estrella(String nombre, double radio, double distancia, String archivo_textura, Material material) {
+        super(nombre, radio, distancia);
     }
+    
+   
     
 }
