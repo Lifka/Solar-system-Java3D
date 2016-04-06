@@ -17,11 +17,14 @@ public class Universo {
     private Nave nave;
     private HashMap<String,Astro> astros;
     private Texture textura;
+    private Canvas3D aCanvas;
     
-    public Universo (String archivo_text){
+
+    public Universo (String archivo_text,Canvas3D aCanvas){
         this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
         this.astros = new HashMap<String,Astro>();
+        this.aCanvas = aCanvas;
     }
     
     public int getNumComponentes(){
@@ -74,6 +77,57 @@ public class Universo {
         astros.put(deimos.getNombre(), deimos);
         
         Astro io = new Satelite("Io",1820,422000, dir_text_sat + "io.jpg", new Material(), Color.white, 1,1);
+        
+    }
+
+    
+    
+    
+    public void createUniverso(){
+
+        ViewingPlatform viewnzgPlatform = new ViewingPlatform ( ) ;
+
+      
+
+       // Branch de planetas
+        BranchGroup planetas = new BranchGroup();
+        
+        // Enganchar los planetas al universo
+        universe.addBranchGraph(planetas);
+        
+        /*************/
+        /* PLANETAS */
+        /***********/
+        
+        /* Mercurio */
+        
+        // Mercurio es transformable
+        TransformGroup conjuntoMercurio = new TransformGroup ();
+        conjuntoMercurio.setCapability(TransformGroup .ALLOW_TRANSFORM_WRITE);
+        
+        // Enganchar conjuntoMercurio del branch de planetas
+        planetas.addChild(conjuntoMercurio);
+        //conjuntoMercurio.setTransform(Transformacion);
+        
+        /* Venus */
+        
+        // Venus es transformable
+        TransformGroup conjuntoVenus = new TransformGroup ();
+        conjuntoMercurio.setCapability(TransformGroup .ALLOW_TRANSFORM_WRITE);
+        
+        // Enganchar conjuntoVenus del branch de planetas
+        planetas.addChild(conjuntoVenus);
+        //conjuntoVenus.setTransform(Transformacion);
+        
+        /* Tierra */
+        
+        // Tierra es transformable
+        TransformGroup conjuntoTierra = new TransformGroup ();
+        conjuntoMercurio.setCapability(TransformGroup .ALLOW_TRANSFORM_WRITE);
+        
+        // Enganchar conjuntoTierra del branch de planetas
+        planetas.addChild(conjuntoTierra);
+        //conjuntoTierra.setTransform(Transformacion);
         
     }
 }

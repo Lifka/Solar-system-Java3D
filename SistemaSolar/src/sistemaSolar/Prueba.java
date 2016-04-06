@@ -24,42 +24,11 @@ public class Prueba {
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Visualization visualizationWindows = new Visualization(canvas);
         
-        SimpleUniverse universe = new SimpleUniverse(canvas);
+        Universo universe = new Universo(canvas);
         universe.getViewingPlatform().setNominalViewingTransform();
         
         Appearance apariencia = new Appearance();
         
-        // Branch de planetas
-        BranchGroup planetas = new BranchGroup();
-        
-        // Enganchar los planetas al universo
-        universe.addBranchGraph(planetas);
-        
-        // Mercurio es transformable
-        TransformGroup conjuntoMercurio = new TransformGroup ();
-        conjuntoMercurio.setCapability(TransformGroup .ALLOW_TRANSFORM_WRITE);
-        
-        // Enganchar conjuntoMercurio del branch de planetas
-        planetas.addChild(conjuntoMercurio);
-        //conjuntoMercurio.setTransform(Transformacion);
-        
-        
-        
-      /*  
-        
-        
-        apariencia.setPolygonAttributes(new PolygonAttributes(
-                PolygonAttributes.POLYGON_LINE,
-                PolygonAttributes.CULL_BACK,1.5f
-        ));
-        
-        Sphere esfera = new Sphere(0.7f, apariencia);
-        
-        BranchGroup root = new BranchGroup();
-        root.addChild(esfera);
-        universe.addBranchGraph(root);
-        visualizationWindows.setVisible(true);*/
-      
       
       
     }
