@@ -29,13 +29,52 @@ public abstract class Astro {
         this.distancia = distancia;
     }
     
+    public Astro(String nombre, double radio, double distancia, 
+            String archivo_textura, Material material, Color color,
+            double rotacion, double traslacion){
+        this.nombre = nombre;
+        this.radio = radio;
+        this.distancia = distancia;
+        setApariencia(archivo_textura, material, color);
+        setMovimiento(rotacion, traslacion);
+    }
+    
     public void setApariencia(String archivo_textura, Material material, Color color){
         this.textura = new TextureLoader(archivo_textura, null).getTexture();
         this.material = material;
         this.color = color;
     }
+    
     public void setMovimiento(double rotacion, double traslacion){
         this.t_rotacion = rotacion;
         this.t_traslacion = traslacion;
+    }
+    
+    public void setRadio(double newRadio){
+        radio = newRadio;
+    }
+    
+    public double getRadio(){
+        return radio;
+    }
+    
+    public String getNombre(){
+        
+    }
+    
+    public boolean rota(){
+        
+    }
+    
+    public boolean traslada(){
+        
+    }
+    
+    public Punto getLocalizacion(){
+        
+    }
+    
+    private void creaTextura(String textureFile){
+        
     }
 }
