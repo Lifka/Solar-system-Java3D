@@ -80,8 +80,8 @@ public class Universo {
         Astro deimos = new Satelite("Deimos",7,23460, dir_text_sat + "deimos.jpg", new Material(), Color.white, 1.25,1.25); 
         astros.put(deimos.getNombre(), deimos);
         
-        Astro io = new Satelite("Io",1820,422000, dir_text_sat + "io.jpg", new Material(), Color.white, 1,1);
-        
+        Astro io = new Satelite("Io",1820,422000, dir_text_sat + "io.jpg", new Material(), Color.white, 1.75,1.75);
+        astros.put(io.getNombre(),io);
     }
 
     
