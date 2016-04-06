@@ -6,14 +6,39 @@
  */
 package sistemaSolar;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import javax.media.j3d.Material;
 
 public class Estrella extends Astro{
     
-    public Estrella(String nombre, double radio, double distancia, String archivo_textura, Material material) {
-        super(nombre, radio, distancia);
+    private double luminosidad;
+    private ArrayList<Planeta> planetas;
+    
+    public Estrella(String nombre, double radio, double distancia, Punto p, String archivo_textura, Material material, Color c, double rotacion, double luminosidad) {
+        super(nombre, radio, distancia, p, archivo_textura, material, c, rotacion, 0.0);
+        this.luminosidad = luminosidad;
     }
     
-   
+    public Estrella (String nombre, double radio, double distancia, Punto p, double luminosidad){
+        super(nombre,radio,distancia,p);
+        this.luminosidad = luminosidad;
+    }
+  
+    public void setLuminosidad(double luninosidad){
+        this.luminosidad = luminosidad;
+    }
+    
+    public void addPlaneta(Planeta p){
+        planetas.add(p);
+    }
+    
+    public void removePlaneta(Planeta p){
+        planetas.remove(p);
+    }
+    
+    public int getNumPlanetas(){
+        return planetas.size();
+    }
     
 }
