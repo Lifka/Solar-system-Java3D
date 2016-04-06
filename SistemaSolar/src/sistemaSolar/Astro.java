@@ -21,22 +21,28 @@ public abstract class Astro {
     protected Material material;
     protected Color color;
     
+    protected Punto posicion;
+    
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
-    public Astro(String nombre, double radio, double distancia){
+    public Astro(String nombre, double radio, double distancia, Punto posicion){
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        this.posicion = posicion;
     }
     
-    public Astro(String nombre, double radio, double distancia, 
+    public Astro(String nombre, double radio, double distancia, Punto posicion,
             String archivo_textura, Material material, Color color,
             double rotacion, double traslacion){
+        
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        this.posicion = posicion;
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
+        
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
@@ -50,31 +56,28 @@ public abstract class Astro {
         this.t_traslacion = traslacion;
     }
     
-    public void setRadio(double newRadio){
-        radio = newRadio;
-    }
-    
     public double getRadio(){
         return radio;
     }
     
     public String getNombre(){
-        
+        return nombre;
     }
     
     public boolean rota(){
-        
+        return (t_rotacion > 0);
     }
     
     public boolean traslada(){
-        
+        return (t_traslacion > 0);
     }
     
     public Punto getLocalizacion(){
-        
+        return posicion;
     }
     
-    private void creaTextura(String textureFile){
-        
+    public void desplaza(float x, float y, float z){
+        posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
+    
 }
