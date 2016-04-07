@@ -37,6 +37,7 @@ public abstract class Astro extends BranchGroup{
         this.radio = radio;
         this.distancia = distancia;
         esfera = new Sphere();
+        addChild(esfera);
     }
     
     public Astro(String nombre, double radio, double distancia,
@@ -48,8 +49,7 @@ public abstract class Astro extends BranchGroup{
         this.distancia = distancia;
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
-        esfera = new Sphere(1.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, apariencia);
-        System.out.println("Hola");
+        addChild(esfera);
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
@@ -58,6 +58,7 @@ public abstract class Astro extends BranchGroup{
         apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
+        esfera = new Sphere(1.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, 50, apariencia);
     }
     
     public void setMovimiento(double rotacion, double traslacion){

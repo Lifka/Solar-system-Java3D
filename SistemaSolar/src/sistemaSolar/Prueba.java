@@ -56,11 +56,9 @@ public class Prueba {
         simpleUniverse.addBranchGraph(raiz);
        
         /*universe.crearSistemaSolar();
-=======
         universe.crearSistemaSolar();
-*/
-        /*
-        // TODO
+        ArrayList<Astro> astros = universe.getAstrosArray();
+        
         BranchGroup raiz = new BranchGroup();
         
         for (Astro a : astros)
