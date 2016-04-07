@@ -11,18 +11,15 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
-import javax.media.j3d.Material;
-import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
-import javax.media.j3d.Texture;
 
 public class Prueba {
 
@@ -57,14 +54,21 @@ public class Prueba {
         simpleUniverse.addBranchGraph(background);
         simpleUniverse.addBranchGraph(raiz);
        
-        
+        universe.crearSistemaSolar();
+        ArrayList<Astro> astros = universe.getAstrosArray();
+
         
         /*
         // TODO
+=======
+>>>>>>> origin/master
         BranchGroup raiz = new BranchGroup();
         
-         Sphere sphere = new Sphere(0.5f);
-        raiz.addChild(sphere);
+        for (Astro a : astros)
+            raiz.addChild(a);
+     
+        // hacemos la pantalla visible
+        visualizationWindows.setVisible(true);
      
         
         Color3f color = new Color3f(4.0f, -7.0f, -12.0f);
