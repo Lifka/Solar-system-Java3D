@@ -9,6 +9,7 @@ package sistemaSolar;
 import com.sun.j3d.utils.geometry.ColorCube;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.geometry.Sphere;
+import java.awt.BorderLayout;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
@@ -28,11 +29,14 @@ public class Prueba {
     public static void main(String[] args) {
         // TODO code application logic here
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
+        canvas.setSize(10000, 10000);
         Visualization visualizationWindows = new Visualization(canvas);
         
         Universo universe = new Universo(new String(), canvas);
         
         SimpleUniverse simpleUniverse = universe.createUniverso();
+       
+        visualizationWindows.setVisible(true);
         
         
         
@@ -54,8 +58,7 @@ public class Prueba {
        
         simpleUniverse.addBranchGraph(raiz);
         
-        
- 
+       
 
         
        // Branch de planetas

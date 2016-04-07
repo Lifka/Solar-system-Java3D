@@ -160,7 +160,7 @@ public class Universo {
         
         // Creamos lo que hace que se vean las cosas, manualmente, para poder asignarlo
         // y personalizarlo
-        ViewingPlatform viewingPlatform = new ViewingPlatform ();
+       ViewingPlatform viewingPlatform = new ViewingPlatform();
         // Radio de activación
         viewingPlatform.getViewPlatform().setActivationRadius(100f);
         
@@ -168,19 +168,18 @@ public class Universo {
         TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
         Transform3D viewTransform3D = new Transform3D ( );
         viewTransform3D.lookAt (new Point3d (20 ,20 ,20 ),
-            new Point3d (0, 0, 0), new Vector3d (0 ,1 ,0));
+                new Point3d (0, 0, 0), new Vector3d (0 ,1 ,0));
         
         viewTransform3D.invert();
-        viewTransformGroup .setTransform(viewTransform3D);
+        viewTransformGroup.setTransform(viewTransform3D);
         
         // Mover la cámara con el ratón
         OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior .REVERSE_ALL);
-        BoundingSphere bound = new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f);
-        orbit.setSchedulingBounds(bound);
+        orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
         
         orbit.setZoomFactor(2.0f);
         
-        viewingPlatform. setViewPlatformBehavior(orbit);
+        viewingPlatform.setViewPlatformBehavior(orbit);
     
         
         /**************   VIEWER     **************/
@@ -190,7 +189,7 @@ public class Universo {
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
         
-        return new SimpleUniverse(viewingPlatform, viewer);
+        return (new SimpleUniverse(viewingPlatform,viewer));
 
     }
 
