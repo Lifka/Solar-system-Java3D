@@ -11,6 +11,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
@@ -39,20 +40,16 @@ public class Prueba {
         
         SimpleUniverse simpleUniverse = universe.createUniverso();
         
-        String dir_text_sol = "src/texturas_estrellas/";     
-        Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
-
-        simpleUniverse.addBranchGraph(sol);
-       
-        visualizationWindows.setVisible(true);
+        universe.crearSistemaSolar();
+        ArrayList<Astro> astros = universe.getAstrosArray();
         
-        
-        
-        // TODO
         BranchGroup raiz = new BranchGroup();
         
-         Sphere sphere = new Sphere(0.5f);
-        raiz.addChild(sphere);
+        for (Astro a : astros)
+            raiz.addChild(a);
+     
+        // hacemos la pantalla visible
+        visualizationWindows.setVisible(true);
      
         
         Color3f color = new Color3f(4.0f, -7.0f, -12.0f);
