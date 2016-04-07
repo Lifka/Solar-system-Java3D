@@ -62,6 +62,17 @@ public class Universo {
     public HashMap<String,Astro> getAstros() {
         return astros;
     }
+    
+    public ArrayList<Astro> getAstrosArray(){
+        ArrayList<Astro> as = new ArrayList();
+        
+        for (Astro value : astros.values()) {
+            as.add(value);
+        }
+        
+        return as;
+        
+    }
 
     public void setAstros(HashMap<String,Astro> astros) {
         this.astros = astros;
