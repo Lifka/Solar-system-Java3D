@@ -130,6 +130,15 @@ public class Universo {
             ((Planeta) urano).addSatelite((Satelite) miranda);
         Astro neptuno = new Planeta("neptuno", 24769, 4498, dir_text_pla + "neptuno.jpg", new Material(), Color.white, 0.6745, 60189, (Estrella) sol, new HashMap());
             ((Planeta) neptuno).addSatelite((Satelite) triton);
+            
+        astros.put(mercurio.getNombre(), mercurio);
+        astros.put(venus.getNombre(), venus);
+        astros.put(tierra.getNombre(), tierra);
+        astros.put(marte.getNombre(), marte);
+        astros.put(jupiter.getNombre(), jupiter);
+        astros.put(saturno.getNombre(), saturno);
+        astros.put(urano.getNombre(), urano);
+        astros.put(neptuno.getNombre(), neptuno);
     }
 
     
