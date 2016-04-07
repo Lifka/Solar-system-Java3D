@@ -8,6 +8,8 @@ package sistemaSolar;
 
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.geometry.ColorCube;
+import com.sun.j3d.utils.geometry.Primitive;
+import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.Viewer;
@@ -15,6 +17,8 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.Background;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
@@ -72,9 +76,9 @@ public class Universo {
     }
     
     public void crearSistemaSolar(){
-        String dir_text_sol = "texturas_estrellas/";
-        String dir_text_sat = "texturas_satelites/";
-        String dir_text_pla = "texturas_planetas/";
+        String dir_text_sol = "src/texturas_estrellas/";
+        String dir_text_sat = "src/texturas_satelites/";
+        String dir_text_pla = "src/texturas_planetas/";
         
         // ESTRELLAS --> SOL
         Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
@@ -174,7 +178,7 @@ public class Universo {
         viewTransformGroup.setTransform(viewTransform3D);
         
         // Mover la cámara con el ratón
-        OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior .REVERSE_ALL);
+        OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
         orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
         
         orbit.setZoomFactor(2.0f);
@@ -192,5 +196,30 @@ public class Universo {
         return (new SimpleUniverse(viewingPlatform,viewer));
 
     }
+    
+    
+    public BranchGroup createBackground(){
+        
+        Background background = new Background();
+        BoundingSphere bound = new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000000.0);
+        background.setApplicationBounds(bound);
+        
+        Appearance apariencia = new Appearance();
+        Texture textura = new TextureLoader ("src/background/back.jpg" , null).getTexture();
+        apariencia.setTexture(textura);
+        
+        Sphere esfera = new Sphere(1.0f, Primitive.GENERATE_TEXTURE_COORDS |
+                Primitive.GENERATE_NORMALS_INWARD, 500, apariencia );
+        
+        BranchGroup geometria = new BranchGroup();
+        geometria.addChild(esfera);
+        
+        background.setGeometry(geometria);
+        
+        BranchGroup backgroundBranch = new BranchGroup ();
+        backgroundBranch.addChild(background);
+        return backgroundBranch;
+    }
+
 
 }

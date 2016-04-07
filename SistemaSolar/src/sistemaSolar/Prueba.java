@@ -39,15 +39,27 @@ public class Prueba {
         
         SimpleUniverse simpleUniverse = universe.createUniverso();
         
+        
+        visualizationWindows.setVisible(true);
+        
+        BranchGroup raiz = new BranchGroup();
+        
         String dir_text_sol = "src/texturas_estrellas/";     
         Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
 
-        simpleUniverse.addBranchGraph(sol);
+        raiz.addChild(sol);
+        
+        BranchGroup background = universe.createBackground();
+    
+        
+        simpleUniverse.getViewingPlatform().setNominalViewingTransform();
+        
+        simpleUniverse.addBranchGraph(background);
+        simpleUniverse.addBranchGraph(raiz);
        
-        visualizationWindows.setVisible(true);
         
         
-        
+        /*
         // TODO
         BranchGroup raiz = new BranchGroup();
         
@@ -67,7 +79,7 @@ public class Prueba {
         simpleUniverse.addBranchGraph(raiz);
         
        
-
+*/
         
        // Branch de planetas
        /* BranchGroup planetas = new BranchGroup();
