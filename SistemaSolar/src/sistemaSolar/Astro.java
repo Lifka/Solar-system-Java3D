@@ -7,14 +7,17 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.geometry.Primitive;
+import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
+import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
 
 public abstract class Astro extends BranchGroup{
     protected Primitive esfera;
+    protected Appearance apariencia;
     
     protected String nombre;
  
@@ -33,6 +36,7 @@ public abstract class Astro extends BranchGroup{
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        esfera = new Sphere();
     }
     
     public Astro(String nombre, double radio, double distancia,
@@ -44,11 +48,14 @@ public abstract class Astro extends BranchGroup{
         this.distancia = distancia;
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
+        esfera = new Sphere();
         
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
+        apariencia = new Appearance();
         this.textura = new TextureLoader(archivo_textura, null).getTexture();
+        apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
     }

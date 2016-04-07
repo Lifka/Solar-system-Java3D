@@ -10,16 +10,19 @@ import com.sun.j3d.utils.geometry.ColorCube;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.Material;
 import javax.media.j3d.PolygonAttributes;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
+import javax.media.j3d.Texture;
 
 public class Prueba {
 
@@ -35,6 +38,11 @@ public class Prueba {
         Universo universe = new Universo(new String(), canvas);
         
         SimpleUniverse simpleUniverse = universe.createUniverso();
+        
+        String dir_text_sol = "src/texturas_estrellas/";     
+        Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
+
+        simpleUniverse.addBranchGraph(sol);
        
         visualizationWindows.setVisible(true);
         
