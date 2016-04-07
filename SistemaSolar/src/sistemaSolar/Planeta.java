@@ -5,6 +5,7 @@
  */
 package sistemaSolar;
 
+import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,16 +23,19 @@ public class Planeta extends Astro{
         super(nombre, radio, distancia, archivo_textura, material, c, rotacion, traslacion );
         this.estrella = estrella;
         this.satelites = satelites;
+        esfera = new Sphere();
     }
     public Planeta(String nombre, double radio, double distancia, Estrella estrella, HashMap<String,Satelite> satelites){
         super(nombre, radio, distancia);
         this.estrella = estrella;
         this.satelites = satelites;
+        esfera = new Sphere();
     }
     public Planeta(String nombre, double radio, double distancia){
         super(nombre, radio, distancia);
         this.estrella = null;
-        this.satelites = new HashMap<String,Satelite>();
+        this.satelites = new HashMap();
+        esfera = new Sphere();
     }
     
     public void addSatelite(Satelite s){

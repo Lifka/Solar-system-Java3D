@@ -6,12 +6,16 @@
  */
 package sistemaSolar;
 
+import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
+import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
 
-public abstract class Astro {
+public abstract class Astro extends BranchGroup{
+    protected Primitive esfera;
+    
     protected String nombre;
  
     protected double radio;
