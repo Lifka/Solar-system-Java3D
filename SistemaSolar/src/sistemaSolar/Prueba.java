@@ -48,6 +48,7 @@ public class Prueba {
         String dir_text_sol = "src/texturas_estrellas/";    
         Material m = new Material();
         m.setEmissiveColor(255, 100, 80);
+        m.setAmbientColor(255,100,80);
         Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", m, Color.white, 26, 10);
 
         Transform3D t3d = new Transform3D();
