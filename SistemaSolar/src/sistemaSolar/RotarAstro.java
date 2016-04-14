@@ -18,7 +18,7 @@ import javax.media.j3d.WakeupOnAWTEvent;
  */
 public class RotarAstro extends Behavior{
     private TransformGroup referencia;
-    WakeupOnAWTEvent condicion = new WakeupOnAWTEvent();
+    WakeupOnAWTEvent condicion = new WakeupOnAWTEvent(KeyEvent.KEY_PRESSED);
     private Transform3D rotacion = new Transform3D();
     private double angulo = 0.0;
     
