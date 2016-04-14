@@ -7,7 +7,6 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
-import com.sun.j3d.utils.geometry.ColorCube;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
@@ -170,7 +169,6 @@ public class Universo {
     
     public SimpleUniverse createUniverso(){
 
-        
         /***********    VIEWINGPLATFORM   **********/
         
         // Creamos lo que hace que se vean las cosas, manualmente, para poder asignarlo
@@ -192,7 +190,7 @@ public class Universo {
         OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
         orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
         
-        orbit.setZoomFactor(2.0f);
+        orbit.setZoomFactor(1.0f);
         
         viewingPlatform.setViewPlatformBehavior(orbit);
     

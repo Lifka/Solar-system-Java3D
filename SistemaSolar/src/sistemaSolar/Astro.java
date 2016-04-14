@@ -58,7 +58,7 @@ public abstract class Astro extends BranchGroup{
         apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
-        esfera = new Sphere(1.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, 50, apariencia);
+        esfera = new Sphere(0.5f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, 50, apariencia);
     }
     
     public void setMovimiento(double rotacion, double traslacion){
@@ -85,5 +85,5 @@ public abstract class Astro extends BranchGroup{
     public void desplaza(float x, float y, float z){
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
-   
+
 }
