@@ -91,7 +91,7 @@ public class Universo {
         String dir_text_pla = "src/texturas_planetas/";
         
         // ESTRELLAS --> SOL
-        Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
+        Astro sol = new Estrella("sol", 696342, dir_text_sol + "sol.jpg", new Material(), Color.white, 26, 10);
         astros.put(sol.getNombre(),sol);
         
         // SATÉLITES
@@ -116,13 +116,13 @@ public class Universo {
         Astro titania = new Satelite("titania",788, 436000, dir_text_sat + "titania.jpg", new Material(), Color.white, 8.7, 8.7);
         astros.put(titania.getNombre(), titania);
         
-        Astro ariel = new Satelite("ariel", 578.5, 190000, dir_text_sat + "ariel.jpg", new Material(), Color.white, 2.52,2.52);
+        Astro ariel = new Satelite("ariel", (float) 578.5, 190000, dir_text_sat + "ariel.jpg", new Material(), Color.white, 2.52,2.52);
         astros.put(titania.getNombre(), titania);
         
         Astro miranda = new Satelite("miranda",236, 130000 ,dir_text_sat + "miranda.jpg", new Material(), Color.white, 1.41,1.41);
         astros.put(miranda.getNombre(), miranda);
         
-        Astro triton = new Satelite("triton",1353.5, 354760, dir_text_sat + "triton.jpg", new Material(), Color.white, -5.88,-5.88);
+        Astro triton = new Satelite("triton", (float) 1353.5, 354760, dir_text_sat + "triton.jpg", new Material(), Color.white, -5.88,-5.88);
         astros.put(triton.getNombre(), triton);
         
         // *******************************************************************/
@@ -132,14 +132,14 @@ public class Universo {
         // rotación y traslación expresados en días
         // *******************************************************************/
         
-        Astro mercurio = new Planeta("mercurio", 2439.7, 57.8, dir_text_pla + "mercurio.jpg", new Material(), Color.white, 58.6, 87.6, (Estrella) sol, null);
-        Astro venus = new Planeta("venus",60500, 108.2, dir_text_pla + "venus.jpg", new Material(), Color.white, 243 , 224.5, (Estrella) sol, null);
-        Astro tierra = new Planeta("tierra", 6378, 149.6, dir_text_pla + "tierra.jpg", new Material(), Color.white, 1, 365.25, (Estrella) sol, new HashMap());
+        Astro mercurio = new Planeta("mercurio", (float) 2439.7, (float) 57.8, dir_text_pla + "mercurio.jpg", new Material(), Color.white, 58.6, 87.6, (Estrella) sol, null);
+        Astro venus = new Planeta("venus",60500, (float) 108.2, dir_text_pla + "venus.jpg", new Material(), Color.white, 243 , 224.5, (Estrella) sol, null);
+        Astro tierra = new Planeta("tierra", 6378, (float) 149.6, dir_text_pla + "tierra.jpg", new Material(), Color.white, 1, 365.25, (Estrella) sol, new HashMap());
             ((Planeta) tierra).addSatelite((Satelite) luna);
-        Astro marte = new Planeta("marte", 3393.5, 227.9, dir_text_pla + "marte.jpg", new Material(), Color.white, 1.03, 686.6, (Estrella) sol, new HashMap());
+        Astro marte = new Planeta("marte", (float) 3393.5, (float) 227.9, dir_text_pla + "marte.jpg", new Material(), Color.white, 1.03, 686.6, (Estrella) sol, new HashMap());
             ((Planeta) marte).addSatelite((Satelite) fobos);
             ((Planeta) marte).addSatelite((Satelite) deimos);
-        Astro jupiter = new Planeta("jupiter",71492, 778.5, dir_text_pla + "jupiter.jpg", new Material(), Color.white, 0.414, 4331.86, (Estrella) sol, new HashMap());
+        Astro jupiter = new Planeta("jupiter",71492, (float) 778.5, dir_text_pla + "jupiter.jpg", new Material(), Color.white, 0.414, 4331.86, (Estrella) sol, new HashMap());
             ((Planeta) jupiter).addSatelite((Satelite) io);
             ((Planeta) jupiter).addSatelite((Satelite) europa);
             ((Planeta) jupiter).addSatelite((Satelite) calisto);
@@ -217,7 +217,7 @@ public class Universo {
         Texture textura = new TextureLoader ("src/background/back.jpg" , null).getTexture();
         apariencia.setTexture(textura);
         
-        Sphere esfera = new Sphere(1.0f, Primitive.GENERATE_TEXTURE_COORDS |
+        Sphere esfera = new Sphere(1.5f, Primitive.GENERATE_TEXTURE_COORDS |
                 Primitive.GENERATE_NORMALS_INWARD, 500, apariencia );
         
         BranchGroup geometria = new BranchGroup();
