@@ -7,6 +7,7 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.BoundingSphere;
@@ -60,6 +61,7 @@ public class Prueba {
         m.setAmbientColor(255,100,80);
         // Lo creamos
         Astro sol = astros.get("sol");
+        sol.makeTransform();
 
         // Transformaciones del objeto (van en un transform group)
         Transform3D t3d = new Transform3D();
@@ -80,21 +82,13 @@ public class Prueba {
         
         // *************** PLANETAS
         for(int i = 0; i < astros_array.size(); i++){
-            
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
                 System.out.println(((Planeta) astro).nombre);
-                // Material
-                Material mat = new Material();
-
-                // Características del material
-                // ------------
-                
+                astro.makeTransform();
                 raiz.addChild(astro);
                 
             }
-            
-            
         }
         
         

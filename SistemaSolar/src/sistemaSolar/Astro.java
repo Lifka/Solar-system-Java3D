@@ -10,6 +10,7 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
@@ -30,12 +31,17 @@ public abstract class Astro extends BranchGroup{
     protected float radio;
     protected float distancia;
     
+    protected float radio_false;
+    protected float distancia_false;
+    protected float rotacion_false;
+    protected float traslacion_false;
+    
     protected Texture textura;
     protected Material material;
     protected Color color;
     
     protected Punto posicion;
-    
+    ArrayList<Anillo> anillos;
     
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
@@ -44,8 +50,7 @@ public abstract class Astro extends BranchGroup{
         this.radio = radio;
         this.distancia = distancia;
         esfera = new Sphere();
-        
-        makeTransform();
+        anillos = new ArrayList();
     }
     
     public Astro(String nombre, float radio, float distancia,
@@ -55,19 +60,25 @@ public abstract class Astro extends BranchGroup{
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        anillos = new ArrayList();
+        
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
-        
-        makeTransform();
     }
     
+    public void addAnillo(Anillo a){
+        anillos.add(a);
+    }
     
+    public boolean hasAnillos(){
+        return (anillos.size() > 0);
+    }
+
     public TransformGroup createTransformGroup(TransformGroup tg, Transform3D transform){
         tg = new TransformGroup(transform);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         return tg;
-        
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
@@ -92,6 +103,10 @@ public abstract class Astro extends BranchGroup{
         return distancia/10;
     }
     
+    public double getRadio(){
+        return (Math.sqrt(radio)/100);
+    }
+    
     public boolean rota(){
         return (t_rotacion > 0);
     }
@@ -109,21 +124,24 @@ public abstract class Astro extends BranchGroup{
     }
     
     public void makeTransform(){
-        TransformGroup rota = getRotartransform(this.t_rotacion);
+        TransformGroup rota = getRotartransform(rotacion_false);
         TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(this.t_traslacion);
+        TransformGroup traslada = getRotartransform(traslacion_false);
         rota.addChild(esfera);
+        for (Anillo a : anillos){
+            rota.addChild(a);
+        }
         distance.addChild(rota);
         traslada.addChild(distance);
         addChild(traslada);
     }
     
-    public TransformGroup getRotartransform(double velocidad){
+    public TransformGroup getRotartransform(float vel_rotar){
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long) velocidad * 1000, 0, 0 ,0, 0, 0);
+        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_rotar, 0, 0 ,0, 0, 0);
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
         rot_interpolator.setSchedulingBounds(bounds);
