@@ -45,7 +45,7 @@ public abstract class Astro extends BranchGroup{
         this.distancia = distancia;
         esfera = new Sphere();
         
-        makeMagic();
+        makeTransform();
     }
     
     public Astro(String nombre, float radio, float distancia,
@@ -58,7 +58,7 @@ public abstract class Astro extends BranchGroup{
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
         
-        makeMagic();
+        makeTransform();
         
         
     }
@@ -110,7 +110,7 @@ public abstract class Astro extends BranchGroup{
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
     
-    public void makeMagic(){
+    public void makeTransform(){
         TransformGroup rota = getRotartransform();
         TransformGroup distancie = getDistanceTransform();
         rota.addChild(esfera);
