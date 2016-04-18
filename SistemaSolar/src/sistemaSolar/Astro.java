@@ -19,6 +19,7 @@ import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Texture;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Vector3f;
 
 public abstract class Astro extends BranchGroup{
     protected Primitive esfera;
@@ -35,6 +36,7 @@ public abstract class Astro extends BranchGroup{
     
     protected Punto posicion;
     
+    
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
     public Astro(String nombre, float radio, float distancia){
@@ -42,7 +44,8 @@ public abstract class Astro extends BranchGroup{
         this.radio = radio;
         this.distancia = distancia;
         esfera = new Sphere();
-        addChild(esfera);
+        
+        makeMagic();
     }
     
     public Astro(String nombre, float radio, float distancia,
@@ -54,7 +57,19 @@ public abstract class Astro extends BranchGroup{
         this.distancia = distancia;
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
-        addChild(esfera);
+        
+        makeMagic();
+        
+        
+    }
+    
+    
+    public TransformGroup createTransformGroup(TransformGroup tg, Transform3D transform){
+        tg = new TransformGroup(transform);
+        tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        return tg;
+        
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
@@ -95,22 +110,36 @@ public abstract class Astro extends BranchGroup{
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
     
-    public TransformGroup rotar(){
+    public void makeMagic(){
+        TransformGroup rota = getRotartransform();
+        TransformGroup distancie = getDistanceTransform();
+        rota.addChild(esfera);
+        distancie.addChild(rota);
+        addChild(distancie);
+    }
+    
+    public TransformGroup getRotartransform(){
         Transform3D yAxis = new Transform3D();
-        TransformGroup rotator = new TransformGroup(yAxis);
-        rotator.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	rotator.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        
+        TransformGroup tg = new TransformGroup(yAxis);
         Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, 100000, 0, 0 ,0, 0, 0);
-        RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, rotator, yAxis, 0.0f, (float) Math.PI*2.0f);
+        RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
         rot_interpolator.setSchedulingBounds(bounds);
         
-        // añadimos al TransformGroup la animación y la figura
-        rotator.addChild(rot_interpolator);
-        rotator.addChild(this);
         
-        return rotator;
+        // añadimos al TransformGroup la animación y la figura
+        tg.addChild(rot_interpolator);
+        return(tg);
+    }
+    
+    
+    public TransformGroup getDistanceTransform(){
+        Transform3D transform = new Transform3D();
+        transform.set(new Vector3f(getDistancia(),0.0f,0.0f));
+        
+        TransformGroup tg = createTransformGroup(new TransformGroup(), transform);
+        
+        return(tg);
     }
 
 }

@@ -39,7 +39,7 @@ public class Prueba {
         // Crear canvas (pantalla)
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         // Tamaño canvas
-        canvas.setSize(10000, 10000);
+        canvas.setSize(15000, 15000);
         // Ventana
         Visualization visualizationWindows = new Visualization(canvas);
         visualizationWindows.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -104,25 +104,23 @@ public class Prueba {
                 // Características del material
                 // ------------
 
-                // Transformaciones del objeto (van en un transform group)
-                Transform3D transform = new Transform3D();
-                transform.set(new Vector3f(astro.getDistancia(),0.0f,0.0f));
-                TransformGroup grupo_rotar = new TransformGroup(transform);
-
-                // Capabilities
-                grupo_rotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-                grupo_rotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-
-                // Le damos la capacidad de rotar con el teclado
-                RotarAstro comportamient = new RotarAstro(grupo_rotar);
-                BoundingSphere bound = new BoundingSphere();
-                comportamient.setSchedulingBounds(bound);
                 
 
+                // Le damos la capacidad de rotar con el teclado
+             /*   RotarAstro comportamient = new RotarAstro(tg_astro);
+                BoundingSphere bound = new BoundingSphere();
+                comportamient.setSchedulingBounds(bound);*/
+
+                // Rotar
+                
+              //  astro.addChild(comportamient);
+              //  astro.addChild(tg_astro);
+                raiz.addChild(astro);
+                
                 // Añadimos en el mismo nodo el objeto y el comportamiento
-                grupo_rotar.addChild(comportamient);
-                grupo_rotar.addChild(astro);
-                raiz.addChild(grupo_rotar);
+                /*tg_astro.addChild(comportamient);
+                tg_astro.addChild(astro);
+                raiz.addChild(tg_astro);*/
             }
             
             
