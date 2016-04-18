@@ -81,12 +81,9 @@ public class Prueba {
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
         // Le damos la capacidad de rotar con el teclado
-        RotarAstro comportamiento = new RotarAstro(grupoArotar);
         BoundingSphere bounds = new BoundingSphere();
-        comportamiento.setSchedulingBounds(bounds);
         
         // Añadimos en el mismo nodo el objeto y el comportamiento
-        grupoArotar.addChild(comportamiento);
         grupoArotar.addChild(sol);
         
         // Lo añadimos a la raiz
@@ -103,15 +100,6 @@ public class Prueba {
 
                 // Características del material
                 // ------------
-
-                
-
-                // Le damos la capacidad de rotar con el teclado
-             /*   RotarAstro comportamient = new RotarAstro(tg_astro);
-                BoundingSphere bound = new BoundingSphere();
-                comportamient.setSchedulingBounds(bound);*/
-
-                // Rotar
                 
               //  astro.addChild(comportamient);
               //  astro.addChild(tg_astro);

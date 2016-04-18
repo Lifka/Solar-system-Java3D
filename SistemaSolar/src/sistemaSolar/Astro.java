@@ -121,6 +121,8 @@ public abstract class Astro extends BranchGroup{
     public TransformGroup getRotartransform(){
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
+        tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, 100000, 0, 0 ,0, 0, 0);
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
