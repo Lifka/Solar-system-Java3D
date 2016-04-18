@@ -29,6 +29,13 @@ public abstract class Astro extends BranchGroup{
  
     protected float radio;
     protected float distancia;
+ 
+    protected float radio_false;
+    protected float distancia_false;
+    protected float rotacion_false;
+    protected float traslacion_false;
+    
+    
     
     protected Texture textura;
     protected Material material;
@@ -50,16 +57,19 @@ public abstract class Astro extends BranchGroup{
     
     public Astro(String nombre, float radio, float distancia,
             String archivo_textura, Material material, Color color,
-            double rotacion, double traslacion){
+            double rotacion, double traslacion, float radio_false,
+            float distancia_false, float rotacion_false, float traslacion_false){
         
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        this.radio_false = radio_false;
+        this.distancia_false = distancia_false;
+        this.rotacion_false = rotacion_false;
+        this.traslacion_false = traslacion_false;
+        
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
-        
-        makeTransform();
-        
         
     }
     
@@ -78,7 +88,7 @@ public abstract class Astro extends BranchGroup{
         apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
-        esfera = new Sphere((float) (Math.sqrt(radio)/100), Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
+        esfera = new Sphere(radio_false/4, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
     }
     
     public void setMovimiento(double rotacion, double traslacion){
@@ -91,7 +101,7 @@ public abstract class Astro extends BranchGroup{
     }
     
     public float getDistancia(){
-        return distancia/10;
+        return (float)(distancia_false * 1);
     }
     
     public boolean rota(){
@@ -111,19 +121,25 @@ public abstract class Astro extends BranchGroup{
     }
     
     public void makeTransform(){
-        TransformGroup rota = getRotartransform();
-        TransformGroup distancie = getDistanceTransform();
+        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup distance = getDistanceTransform();
+        TransformGroup traslada = getRotartransform(traslacion_false);
         rota.addChild(esfera);
-        distancie.addChild(rota);
-        addChild(distancie);
+        for (Anillo a : anillos){
+            rota.addChild(a);
+        }
+        distance.addChild(rota);
+        traslada.addChild(distance);
+        addChild(traslada);
     }
+
     
-    public TransformGroup getRotartransform(){
+    public TransformGroup getRotartransform(float vel_rotar){
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, 100000, 0, 0 ,0, 0, 0);
+        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_rotar, 0, 0 ,0, 0, 0);
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
         rot_interpolator.setSchedulingBounds(bounds);

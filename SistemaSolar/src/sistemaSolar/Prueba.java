@@ -84,6 +84,7 @@ public class Prueba {
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
                 System.out.println(((Planeta) astro).nombre);
+                System.out.println(((Planeta) astro).distancia);
                 // Material
                 Material mat = new Material();
 

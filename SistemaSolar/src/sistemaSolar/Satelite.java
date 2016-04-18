@@ -15,8 +15,11 @@ public class Satelite extends Astro {
     
     public Satelite(String nombre, float radio, float distancia, 
             String archivo_textura, Material material, Color c,
-            double t_rotacion, double t_traslacion) {
-        super(nombre, radio, distancia, archivo_textura, material, c, t_rotacion, t_traslacion);
+            double t_rotacion, double t_traslacion, float radio_false,
+            float distancia_false, float rotacion_false, float traslacion_false) {
+        
+        super(nombre, radio, distancia, archivo_textura, material, c, t_rotacion, 
+                t_traslacion, radio_false, distancia_false, rotacion_false, traslacion_false);
         this.planeta = null;
     }
     public Satelite(String nombre, float radio, float distancia){

@@ -19,12 +19,19 @@ public class Planeta extends Astro{
     Estrella estrella;
     HashMap<String,Satelite> satelites;
     
-    public Planeta(String nombre, float radio, float distancia, String archivo_textura, Material material, Color c, double rotacion, double traslacion, Estrella estrella, HashMap<String,Satelite> satelites) {
-        super(nombre, radio, distancia, archivo_textura, material, c, rotacion, traslacion );
+    public Planeta(String nombre, float radio, float distancia, String archivo_textura, 
+            Material material, Color c, double rotacion, double traslacion, 
+            Estrella estrella, HashMap<String,Satelite> satelites, float radio_false,
+            float distancia_false, float rotacion_false, float traslacion_false) {
+        
+        super(nombre, radio, distancia, archivo_textura, material, c, rotacion, traslacion,
+                radio_false, distancia_false, rotacion_false, traslacion_false);
+        
         this.estrella = estrella;
         this.satelites = satelites;       
     }
-    public Planeta(String nombre, float radio, float distancia, Estrella estrella, HashMap<String,Satelite> satelites){
+    public Planeta(String nombre, float radio, float distancia, Estrella estrella, 
+            HashMap<String,Satelite> satelites){
         super(nombre, radio, distancia);
         this.estrella = estrella;
         this.satelites = satelites;      
