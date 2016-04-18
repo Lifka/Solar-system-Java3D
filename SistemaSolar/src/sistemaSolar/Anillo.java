@@ -35,7 +35,6 @@ public class Anillo extends BranchGroup{
         this.radio = astro.getRadio()*1.5;
         cilindro = new Cylinder();
         
-        //makeTransform();
     }
     public Anillo(String nombre, double radio, String archivo_textura, Material material, Color color){
         
@@ -51,8 +50,7 @@ public class Anillo extends BranchGroup{
         apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
-        cilindro = new Cylinder((float) (Math.sqrt(radio)/100), (float) 100, Primitive.GENERATE_TEXTURE_COORDS_Y_UP | Primitive.GENERATE_NORMALS, 50,50, apariencia);
-        cilindro = new Cylinder((float) (Math.sqrt(radio)/100), (float)0.1, Primitive.GENERATE_TEXTURE_COORDS_Y_UP | Primitive.GENERATE_NORMALS, 50,50, apariencia);
+        cilindro = new Cylinder((float) (Math.sqrt(radio)/100), (float) 0.1, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
         addChild(cilindro);
     }
 }

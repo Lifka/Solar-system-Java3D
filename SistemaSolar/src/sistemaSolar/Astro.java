@@ -61,6 +61,10 @@ public abstract class Astro extends BranchGroup{
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
+        this.radio_false = radio_false;
+        this.distancia_false = distancia_false;
+        this.rotacion_false = rotacion_false;
+        this.traslacion_false = traslacion_false;
         anillos = new ArrayList();
         
         setApariencia(archivo_textura, material, color);
