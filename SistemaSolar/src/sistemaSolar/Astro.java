@@ -71,6 +71,7 @@ public abstract class Astro extends BranchGroup{
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
         
+        makeTransform();
     }
     
     
@@ -135,11 +136,14 @@ public abstract class Astro extends BranchGroup{
 
     
     public TransformGroup getRotartransform(float vel_rotar){
+
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
         Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_rotar, 0, 0 ,0, 0, 0);
+
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
         rot_interpolator.setSchedulingBounds(bounds);
@@ -149,7 +153,6 @@ public abstract class Astro extends BranchGroup{
         tg.addChild(rot_interpolator);
         return(tg);
     }
-    
     
     public TransformGroup getDistanceTransform(){
         Transform3D transform = new Transform3D();
