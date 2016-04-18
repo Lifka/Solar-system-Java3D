@@ -59,8 +59,6 @@ public abstract class Astro extends BranchGroup{
         setMovimiento(rotacion, traslacion);
         
         makeTransform();
-        
-        
     }
     
     
@@ -111,19 +109,21 @@ public abstract class Astro extends BranchGroup{
     }
     
     public void makeTransform(){
-        TransformGroup rota = getRotartransform();
-        TransformGroup distancie = getDistanceTransform();
+        TransformGroup rota = getRotartransform(this.t_rotacion);
+        TransformGroup distance = getDistanceTransform();
+        TransformGroup traslada = getRotartransform(this.t_traslacion);
         rota.addChild(esfera);
-        distancie.addChild(rota);
-        addChild(distancie);
+        distance.addChild(rota);
+        traslada.addChild(distance);
+        addChild(traslada);
     }
     
-    public TransformGroup getRotartransform(){
+    public TransformGroup getRotartransform(double velocidad){
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, 100000, 0, 0 ,0, 0, 0);
+        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long) velocidad * 1000, 0, 0 ,0, 0, 0);
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, (float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere();
         rot_interpolator.setSchedulingBounds(bounds);
@@ -133,7 +133,6 @@ public abstract class Astro extends BranchGroup{
         tg.addChild(rot_interpolator);
         return(tg);
     }
-    
     
     public TransformGroup getDistanceTransform(){
         Transform3D transform = new Transform3D();
