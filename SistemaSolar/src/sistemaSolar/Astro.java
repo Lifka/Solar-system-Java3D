@@ -30,7 +30,7 @@ public abstract class Astro extends BranchGroup{
  
     protected float radio;
     protected float distancia;
-    
+ 
     protected float radio_false;
     protected float distancia_false;
     protected float rotacion_false;
@@ -55,7 +55,8 @@ public abstract class Astro extends BranchGroup{
     
     public Astro(String nombre, float radio, float distancia,
             String archivo_textura, Material material, Color color,
-            double rotacion, double traslacion){
+            double rotacion, double traslacion, float radio_false,
+            float distancia_false, float rotacion_false, float traslacion_false){
         
         this.nombre = nombre;
         this.radio = radio;
@@ -87,7 +88,7 @@ public abstract class Astro extends BranchGroup{
         apariencia.setTexture(textura);
         this.material = material;
         this.color = color;
-        esfera = new Sphere((float) (Math.sqrt(radio)/100), Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
+        esfera = new Sphere(radio_false/4, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
     }
     
     public void setMovimiento(double rotacion, double traslacion){
@@ -100,7 +101,7 @@ public abstract class Astro extends BranchGroup{
     }
     
     public float getDistancia(){
-        return distancia/10;
+        return (float)(distancia_false * 1);
     }
     
     public double getRadio(){
@@ -135,6 +136,7 @@ public abstract class Astro extends BranchGroup{
         traslada.addChild(distance);
         addChild(traslada);
     }
+
     
     public TransformGroup getRotartransform(float vel_rotar){
         Transform3D yAxis = new Transform3D();
