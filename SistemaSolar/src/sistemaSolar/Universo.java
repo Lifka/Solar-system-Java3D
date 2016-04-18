@@ -208,8 +208,9 @@ public class Universo {
             ((Planeta) jupiter).addSatelite((Satelite) calisto);
         Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", new Material(), 
                 Color.white, 0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13,
-                80/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3);             Anillo anillo_a = new Anillo("anillo a",saturno.getRadio() * 1.5, dir_text_pla + "anillo_saturno.png",new Material(),Color.white);
-             saturno.addAnillo(anillo_a);
+                80/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
+            Anillo anillo_a = new Anillo("anillo a",saturno.getRadio() * 1.5, dir_text_pla + "anillo_saturno.png",new Material(),Color.white);
+            saturno.addAnillo(anillo_a);
              
              
             // añadir anillo A
