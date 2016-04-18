@@ -12,6 +12,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Bounds;
@@ -19,6 +20,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Material;
+import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
@@ -50,24 +52,11 @@ public class Prueba {
         m.setEmissiveColor(255, 100, 80);
         m.setAmbientColor(255,100,80);
         Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", m, Color.white, 26, 10);
-
-        Transform3D t3d = new Transform3D();
-        TransformGroup grupoArotar = new TransformGroup(t3d);
-        grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-        grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        
-        RotarAstro comportamiento = new RotarAstro(grupoArotar);
-        BoundingSphere bounds = new BoundingSphere();
-        comportamiento.setSchedulingBounds(bounds);
-        
-        grupoArotar.addChild(comportamiento);
-        grupoArotar.addChild(sol);
-        
-        raiz.addChild(grupoArotar);
-        
+     
+        raiz.addChild(sol.rotar());
+      
+        // BACKGROUND
         BranchGroup background = universe.createBackground();
-    
-        
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
         simpleUniverse.addBranchGraph(background);

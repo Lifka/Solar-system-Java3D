@@ -10,10 +10,15 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
+import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
+import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Texture;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
 
 public abstract class Astro extends BranchGroup{
     protected Primitive esfera;
@@ -84,6 +89,24 @@ public abstract class Astro extends BranchGroup{
     
     public void desplaza(float x, float y, float z){
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
+    }
+    
+    public TransformGroup rotar(){
+        Transform3D yAxis = new Transform3D();
+        TransformGroup rotator = new TransformGroup(yAxis);
+        rotator.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+	rotator.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
+        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, 100000, 0, 0 ,0, 0, 0);
+        RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, rotator, yAxis, 0.0f, (float) Math.PI*2.0f);
+        BoundingSphere bounds = new BoundingSphere();
+        rot_interpolator.setSchedulingBounds(bounds);
+        
+        // añadimos al TransformGroup la animación y la figura
+        rotator.addChild(rot_interpolator);
+        rotator.addChild(this);
+        
+        return rotator;
     }
 
 }
