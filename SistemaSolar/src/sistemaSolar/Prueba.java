@@ -12,6 +12,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Bounds;
@@ -21,6 +22,7 @@ import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Material;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.swing.WindowConstants;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
@@ -31,42 +33,100 @@ public class Prueba {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        // *************** CANVAS
+        // Crear canvas (pantalla)
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
+        // Tamaño canvas
         canvas.setSize(10000, 10000);
+        // Ventana
         Visualization visualizationWindows = new Visualization(canvas);
-        
+        visualizationWindows.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+             
+        // *************** UNIVERSE
+        // Crear Simple Universe
         Universo universe = new Universo(new String(), canvas);
-        
+        // Sale de nuestra propia clase
         SimpleUniverse simpleUniverse = universe.createUniverso();
+        // Crear los astros
+        universe.crearSistemaSolar();
+        HashMap<String,Astro> astros = universe.getAstros();
+        ArrayList<Astro> astros_array = universe.getAstrosArray();
         
-        
+        // Hacemos visible la ventana
         visualizationWindows.setVisible(true);
         
+        // Creamos el árbol
         BranchGroup raiz = new BranchGroup();
         
-        String dir_text_sol = "src/texturas_estrellas/";    
+        // Fondo
+        BranchGroup background = universe.createBackground();
+        
+        // *************** SOL
+        // Definimos el objeto
+        // Material:
         Material m = new Material();
         m.setEmissiveColor(255, 100, 80);
         m.setAmbientColor(255,100,80);
-        Astro sol = new Estrella("sol", 696342, 0.0, dir_text_sol + "sol.jpg", m, Color.white, 26, 10);
+        // Lo creamos
+        Astro sol = astros.get("sol");
 
+        // Transformaciones del objeto (van en un transform group)
         Transform3D t3d = new Transform3D();
+        // grupoArotar --> conjunto de elementos que se rotan juntos
         TransformGroup grupoArotar = new TransformGroup(t3d);
+        // Capabilities
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
+        // Le damos la capacidad de rotar con el teclado
         RotarAstro comportamiento = new RotarAstro(grupoArotar);
         BoundingSphere bounds = new BoundingSphere();
         comportamiento.setSchedulingBounds(bounds);
         
+        // Añadimos en el mismo nodo el objeto y el comportamiento
         grupoArotar.addChild(comportamiento);
         grupoArotar.addChild(sol);
         
+        // Lo añadimos a la raiz
         raiz.addChild(grupoArotar);
         
-        BranchGroup background = universe.createBackground();
-    
+        // *************** PLANETAS
+        for(int i = 0; i < astros_array.size(); i++){
+            
+            Astro astro = astros_array.get(i);
+            if (astro instanceof Planeta){
+                System.out.println(((Planeta) astro).nombre);
+                // Material
+                Material mat = new Material();
+
+                // Características del material
+                // ------------
+
+                // Transformaciones del objeto (van en un transform group)
+                Transform3D transform = new Transform3D();
+                transform.set(new Vector3f(astro.getDistancia(),0.0f,0.0f));
+                TransformGroup grupo_rotar = new TransformGroup(transform);
+
+                // Capabilities
+                grupo_rotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+                grupo_rotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
+                // Le damos la capacidad de rotar con el teclado
+                RotarAstro comportamient = new RotarAstro(grupo_rotar);
+                BoundingSphere bound = new BoundingSphere();
+                comportamient.setSchedulingBounds(bound);
+                
+
+                // Añadimos en el mismo nodo el objeto y el comportamiento
+                grupo_rotar.addChild(comportamient);
+                grupo_rotar.addChild(astro);
+                raiz.addChild(grupo_rotar);
+            }
+            
+            
+        }
+        
         
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
