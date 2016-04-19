@@ -15,6 +15,7 @@ import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
+import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TransparencyAttributes;
 
 public class Anillo extends BranchGroup{
@@ -45,13 +46,20 @@ public class Anillo extends BranchGroup{
     }
     
     public void setApariencia(String archivo_textura, Material material, Color color){
-        apariencia = new Appearance();
-        this.textura = new TextureLoader(archivo_textura, null).getTexture();
-        TransparencyAttributes ta = new TransparencyAttributes(TransparencyAttributes.BLENDED,1.0f);
-        apariencia.setTransparencyAttributes(ta);
-        apariencia.setTexture(textura);
         this.material = material;
-        this.color = color;
+        apariencia = new Appearance();
+        
+        this.textura = new TextureLoader(archivo_textura, null).getTexture();
+        TextureAttributes at = new TextureAttributes();
+        //at.setTextureMode(TextureAttributes.MODULATE);
+        TransparencyAttributes ta = new TransparencyAttributes(TransparencyAttributes.BLENDED,1.0f);
+        
+        apariencia.setTexture(textura);
+        apariencia.setTextureAttributes(at);
+        apariencia.setTransparencyAttributes(ta);
+        
+        apariencia.setMaterial(this.material);
+        
         cilindro = new Cylinder((float) (radio/3), (float) 0.1, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
         addChild(cilindro);
     }

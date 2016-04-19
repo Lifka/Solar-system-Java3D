@@ -38,7 +38,7 @@ public class Universo {
     private Canvas3D aCanvas;
     final int TRASLADO_SOL = 200000;
     final int TRASLADO_ORB = 200000;
-    final float ESCALE = 0.5f;
+    final float ESCALE = 0.3f;
     
 
     public Universo (String archivo_text,Canvas3D aCanvas){
@@ -96,13 +96,14 @@ public class Universo {
         String dir_text_pla = "src/texturas_planetas/";
         
         Material m_planetas = new Material();
-        m_planetas.setAmbientColor(0.7f, 0.7f, 0.7f);
+        m_planetas.setAmbientColor(0.5f, 0.5f, 0.5f);
         m_planetas.setDiffuseColor(1.0f, 1.0f, 1.0f);
-        m_planetas.setSpecularColor(0.8f, 0.8f, 0.8f);
+        m_planetas.setSpecularColor(0.3f, 0.3f, 0.3f);
         
         Material m_sol = new Material();
         m_sol.setAmbientColor(1.0f,0.5f,0.5f);
-        m_sol.setEmissiveColor(0.7f, 0.5f, 0.5f);
+        m_sol.setDiffuseColor(1.0f, 1.0f, 1.0f);
+        m_sol.setEmissiveColor(1.0f, 1.0f, 1.0f);
         
         /*
         
@@ -324,6 +325,11 @@ public class Universo {
         
         BranchGroup backgroundBranch = new BranchGroup ();
         backgroundBranch.addChild(background);
+        
+        // colgamos la luz ambiental al branchgroup
+        LuzAmbiental la = new LuzAmbiental(new Color3f(0.8f,0.2f,0.2f));
+        backgroundBranch.addChild(la);
+        
         return backgroundBranch;
     }
 

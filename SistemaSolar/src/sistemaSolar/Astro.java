@@ -19,6 +19,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Texture;
+import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3f;
@@ -64,6 +65,7 @@ public abstract class Astro extends BranchGroup{
         this.distancia_false = distancia_false;
         this.rotacion_false = rotacion_false;
         this.traslacion_false = traslacion_false;
+        this.material = material;
         
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
@@ -80,10 +82,19 @@ public abstract class Astro extends BranchGroup{
     
     public void setApariencia(String archivo_textura, Material material, Color color){
         apariencia = new Appearance();
-        this.textura = new TextureLoader(archivo_textura, null).getTexture();
-        apariencia.setTexture(textura);
         this.material = material;
-        this.color = color;
+        
+        this.textura = new TextureLoader(archivo_textura, null).getTexture();
+        TextureAttributes at = new TextureAttributes();
+        at.setTextureMode(TextureAttributes.MODULATE);
+        
+        apariencia.setTexture(textura);
+        apariencia.setTextureAttributes(at);
+        
+        apariencia.setMaterial(this.material);
+        
+        
+        //this.color = color;
         esfera = new Sphere(radio_false/4, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
     }
     
@@ -146,6 +157,15 @@ public abstract class Astro extends BranchGroup{
     public TransformGroup getDistanceTransform(){
         Transform3D transform = new Transform3D();
         transform.set(new Vector3f(getDistancia(),0.0f,0.0f));
+        
+        TransformGroup tg = createTransformGroup(new TransformGroup(), transform);
+        
+        return(tg);
+    }
+    
+    public TransformGroup getInclinationTransform(){
+        Transform3D transform = new Transform3D();
+        transform.rotZ(0.3);
         
         TransformGroup tg = createTransformGroup(new TransformGroup(), transform);
         

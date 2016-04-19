@@ -10,13 +10,16 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.AmbientLight;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.PointLight;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.swing.WindowConstants;
+import javax.vecmath.Color3f;
 
 public class Prueba {
 
@@ -74,6 +77,10 @@ public class Prueba {
         // Le damos la capacidad de rotar con el teclado
         BoundingSphere bounds = new BoundingSphere();
         
+        // Añadimos la luz puntual al sol
+        LuzPuntual lp = new LuzPuntual(new Color3f(Color.WHITE));
+        grupoArotar.addChild(lp);
+        
         // Añadimos en el mismo nodo el objeto y el comportamiento
         grupoArotar.addChild(sol);
         
@@ -91,9 +98,11 @@ public class Prueba {
         }
         
         
+        
+        
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
-        simpleUniverse.addBranchGraph(background);
+       raiz.addChild(background);
         simpleUniverse.addBranchGraph(raiz);
        
     }

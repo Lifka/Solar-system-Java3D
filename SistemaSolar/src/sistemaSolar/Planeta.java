@@ -95,23 +95,24 @@ public class Planeta extends Astro{
     
     @Override
     public void makeTransform(){
+        TransformGroup inclinacion = getInclinationTransform();
         TransformGroup rota = getRotartransform(rotacion_false);
         TransformGroup distance = getDistanceTransform();
         TransformGroup traslada = getRotartransform(traslacion_false);
         rota.addChild(esfera);
         
         for (Anillo a : anillos){
-            rota.addChild(a);
+            inclinacion.addChild(a);
         }
-        
+        //rota.addChild(inclinacion);
         
         for (Satelite value : satelites.values()) {
             value.makeTransform();
             rota.addChild(value);
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!  Nombre satélite: " + value.nombre);
         }
                 
         distance.addChild(rota);
+        distance.addChild(inclinacion);
         traslada.addChild(distance);
         addChild(traslada);
     }
