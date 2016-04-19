@@ -106,9 +106,11 @@ public class Prueba {
         
         
         
+        
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
        raiz.addChild(background);
+       raiz.addChild(new Nave().getNaveBranch());
         simpleUniverse.addBranchGraph(raiz);
        
     }

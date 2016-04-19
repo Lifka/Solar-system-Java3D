@@ -6,7 +6,6 @@
 package sistemaSolar;
 
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Material;
@@ -22,11 +21,11 @@ public class Planeta extends Astro{
     ArrayList<Anillo> anillos = new ArrayList();
     
     public Planeta(String nombre, float radio, float distancia, String archivo_textura, 
-            Material material, Color c, double rotacion, double traslacion, 
+            Material material, double rotacion, double traslacion, 
             Estrella estrella, HashMap<String,Satelite> satelites, float radio_false,
             float distancia_false, float rotacion_false, float traslacion_false) {
         
-        super(nombre, radio, distancia, archivo_textura, material, c, rotacion, traslacion,
+        super(nombre, radio, distancia, archivo_textura, material, rotacion, traslacion,
                 radio_false, distancia_false, rotacion_false, traslacion_false);
         
         this.estrella = estrella;

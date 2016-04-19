@@ -6,7 +6,6 @@
  */
 package sistemaSolar;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
@@ -16,11 +15,11 @@ public class Estrella extends Astro{
     private double luminosidad;
     private ArrayList<Planeta> planetas;
     
-    public Estrella(String nombre, float radio, String archivo_textura, Material material, Color c, 
+    public Estrella(String nombre, float radio, String archivo_textura, Material material, 
             double rotacion, double luminosidad, float radio_false,
             float distancia_false, float rotacion_false, float traslacion_false) {
         
-        super(nombre, radio, 0, archivo_textura, material, c, rotacion, 0.0, 
+        super(nombre, radio, 0, archivo_textura, material, rotacion, 0.0, 
                 radio_false, distancia_false, rotacion_false, traslacion_false);
         this.luminosidad = luminosidad;
     }
