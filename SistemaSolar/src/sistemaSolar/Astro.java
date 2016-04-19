@@ -11,6 +11,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
@@ -41,7 +42,6 @@ public abstract class Astro extends BranchGroup{
     protected Color color;
     
     protected Punto posicion;
-    ArrayList<Anillo> anillos;
     
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
@@ -50,7 +50,6 @@ public abstract class Astro extends BranchGroup{
         this.radio = radio;
         this.distancia = distancia;
         esfera = new Sphere();
-        anillos = new ArrayList();
     }
     
     public Astro(String nombre, float radio, float distancia,
@@ -65,19 +64,12 @@ public abstract class Astro extends BranchGroup{
         this.distancia_false = distancia_false;
         this.rotacion_false = rotacion_false;
         this.traslacion_false = traslacion_false;
-        anillos = new ArrayList();
         
         setApariencia(archivo_textura, material, color);
         setMovimiento(rotacion, traslacion);
     }
     
-    public void addAnillo(Anillo a){
-        anillos.add(a);
-    }
-    
-    public boolean hasAnillos(){
-        return (anillos.size() > 0);
-    }
+  
 
     public TransformGroup createTransformGroup(TransformGroup tg, Transform3D transform){
         tg = new TransformGroup(transform);
@@ -131,19 +123,8 @@ public abstract class Astro extends BranchGroup{
         posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
     }
     
-    public void makeTransform(){
-        TransformGroup rota = getRotartransform(rotacion_false);
-        TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false);
-        rota.addChild(esfera);
-        for (Anillo a : anillos){
-            System.out.println("Añadiendo anillo");
-            rota.addChild(a);
-        }
-        distance.addChild(rota);
-        traslada.addChild(distance);
-        addChild(traslada);
-    }
+    
+    public abstract void makeTransform();
 
     
     public TransformGroup getRotartransform(float vel_rotar){

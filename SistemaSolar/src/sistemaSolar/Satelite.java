@@ -8,6 +8,7 @@ package sistemaSolar;
 
 import java.awt.Color;
 import javax.media.j3d.Material;
+import javax.media.j3d.TransformGroup;
 
 
 public class Satelite extends Astro {
@@ -27,13 +28,22 @@ public class Satelite extends Astro {
         this.planeta = null;
     }
     
-    public float getDistancia(){
-        // DISTANCIA RESPECTO A SU PLANETA
-        return distancia;
-    }
-    
     public void setPlaneta(Planeta p){
         this.planeta = p;
     }
+    
+    
+    @Override
+    public void makeTransform(){
+        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup distance = getDistanceTransform();
+        TransformGroup traslada = getRotartransform(traslacion_false);
+        rota.addChild(esfera);
+                
+        distance.addChild(rota);
+        traslada.addChild(distance);
+        addChild(traslada);
+    }
+   
     
 }

@@ -9,6 +9,7 @@ package sistemaSolar;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.media.j3d.Material;
+import javax.media.j3d.TransformGroup;
 
 public class Estrella extends Astro{
     
@@ -44,5 +45,20 @@ public class Estrella extends Astro{
     public int getNumPlanetas(){
         return planetas.size();
     }
+    
+    
+    
+    @Override
+    public void makeTransform(){
+        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup distance = getDistanceTransform();
+        TransformGroup traslada = getRotartransform(traslacion_false);
+        rota.addChild(esfera);
+        
+        distance.addChild(rota);
+        traslada.addChild(distance);
+        addChild(traslada);
+    }
+   
     
 }
