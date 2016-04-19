@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Material;
+import javax.media.j3d.TransformGroup;
 
 /**
  *
@@ -17,7 +18,8 @@ import javax.media.j3d.Material;
  */
 public class Planeta extends Astro{
     Estrella estrella;
-    HashMap<String,Satelite> satelites;
+    HashMap<String,Satelite> satelites = new HashMap();
+    ArrayList<Anillo> anillos = new ArrayList();
     
     public Planeta(String nombre, float radio, float distancia, String archivo_textura, 
             Material material, Color c, double rotacion, double traslacion, 
@@ -28,13 +30,15 @@ public class Planeta extends Astro{
                 radio_false, distancia_false, rotacion_false, traslacion_false);
         
         this.estrella = estrella;
-        this.satelites = satelites;       
+        if (satelites != null)
+            this.satelites = satelites;            
     }
     public Planeta(String nombre, float radio, float distancia, Estrella estrella, 
             HashMap<String,Satelite> satelites){
         super(nombre, radio, distancia);
         this.estrella = estrella;
-        this.satelites = satelites;      
+        if (satelites != null)
+            this.satelites = satelites;      
     }
     public Planeta(String nombre, float radio, float distancia){
         super(nombre, radio, distancia);
@@ -42,10 +46,12 @@ public class Planeta extends Astro{
         this.satelites = new HashMap();
     }
     
+    
     public void addSatelite(Satelite s){
         satelites.put(s.getNombre(),s);
         s.setPlaneta(this);
     }
+    
     
     public boolean hasSatelites(){
         return satelites.size() > 0;
@@ -54,6 +60,7 @@ public class Planeta extends Astro{
     public int getNumSatelites(){
         return satelites.size();
     }
+    
     
     public HashMap<String, Satelite> getSatelites(){
         return satelites;
@@ -69,12 +76,44 @@ public class Planeta extends Astro{
         return sats;
     }
     
+    public void addAnillo(Anillo a){
+        anillos.add(a);
+    }
+    
+    public boolean hasAnillos(){
+        return (anillos.size() > 0);
+    }
+    
     public Estrella getEstrella(){
         return estrella;
     }
     
     public void setEstrella(Estrella estrella){
         this.estrella = estrella;
+    }
+    
+    
+    @Override
+    public void makeTransform(){
+        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup distance = getDistanceTransform();
+        TransformGroup traslada = getRotartransform(traslacion_false);
+        rota.addChild(esfera);
+        
+        for (Anillo a : anillos){
+            rota.addChild(a);
+        }
+        
+        
+        for (Satelite value : satelites.values()) {
+            value.makeTransform();
+            rota.addChild(value);
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!  Nombre satélite: " + value.nombre);
+        }
+                
+        distance.addChild(rota);
+        traslada.addChild(distance);
+        addChild(traslada);
     }
    
     
