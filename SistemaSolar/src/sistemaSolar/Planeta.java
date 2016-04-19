@@ -5,7 +5,7 @@
  */
 package sistemaSolar;
 
-import com.sun.j3d.utils.geometry.Sphere;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;

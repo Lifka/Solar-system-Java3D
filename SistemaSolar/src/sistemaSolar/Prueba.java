@@ -87,7 +87,6 @@ public class Prueba {
                 System.out.println(((Planeta) astro).nombre);
                 astro.makeTransform();
                 raiz.addChild(astro);
-                
             }
         }
         

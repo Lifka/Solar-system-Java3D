@@ -111,6 +111,9 @@ public abstract class Astro extends BranchGroup{
     public double getRadio(){
         return (Math.sqrt(radio)/100);
     }
+    public float getRadioFalse(){
+        return radio_false;
+    }
     
     public boolean rota(){
         return (t_rotacion > 0);
@@ -134,6 +137,7 @@ public abstract class Astro extends BranchGroup{
         TransformGroup traslada = getRotartransform(traslacion_false);
         rota.addChild(esfera);
         for (Anillo a : anillos){
+            System.out.println("Añadiendo anillo");
             rota.addChild(a);
         }
         distance.addChild(rota);

@@ -22,10 +22,12 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.PointLight;
 import javax.media.j3d.Texture;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
+import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
@@ -92,6 +94,15 @@ public class Universo {
         String dir_text_sat = "src/texturas_satelites/";
         String dir_text_pla = "src/texturas_planetas/";
         
+        Material m_planetas = new Material();
+        m_planetas.setAmbientColor(0.7f, 0.7f, 0.7f);
+        m_planetas.setDiffuseColor(1.0f, 1.0f, 1.0f);
+        m_planetas.setSpecularColor(0.8f, 0.8f, 0.8f);
+        
+        Material m_sol = new Material();
+        m_sol.setAmbientColor(1.0f,0.5f,0.5f);
+        m_sol.setEmissiveColor(0.7f, 0.5f, 0.5f);
+        
         /*
         
         nombre
@@ -112,58 +123,58 @@ public class Universo {
         */
         
         // ESTRELLAS --> SOL
-        Astro sol = new Estrella("sol", 696342, dir_text_sol + "sol.jpg", new Material(), 
+        Astro sol = new Estrella("sol", 696342, dir_text_sol + "sol.jpg", m_sol, 
                 Color.white, 26, 10,/*radio_false*/25,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL,/*traslacion_false*/0);
         astros.put(sol.getNombre(),sol);
         
         // SATÉLITES
-        Astro luna = new Satelite("luna", 1737, 370300, dir_text_sat + "luna.jpg", new Material(),
+        Astro luna = new Satelite("luna", 1737, 370300, dir_text_sat + "luna.jpg", m_planetas,
                 Color.white, 27.32, 27.32,4/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL+TRASLADO_SOL/10000,/*traslacion_false*/TRASLADO_ORB/10);
         astros.put(luna.getNombre(), luna);
         
-        Astro fobos = new Satelite("fobos", 11, 9380, dir_text_sat + "fobos.jpg", new Material(), 
+        Astro fobos = new Satelite("fobos", 11, 9380, dir_text_sat + "fobos.jpg", m_planetas, 
                 Color.white, 0.3 , 0.3,2/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/30,/*traslacion_false*/TRASLADO_ORB/17);
         astros.put(fobos.getNombre(), fobos);
         
-        Astro deimos = new Satelite("deimos",7,23460, dir_text_sat + "deimos.jpg", new Material(), 
+        Astro deimos = new Satelite("deimos",7,23460, dir_text_sat + "deimos.jpg", m_planetas, 
                 Color.white, 1.25,1.25,2/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/18,/*traslacion_false*/TRASLADO_ORB/14); 
         astros.put(deimos.getNombre(), deimos);
         
-        Astro io = new Satelite("io",1820,422000, dir_text_sat + "io.jpg", new Material(), 
+        Astro io = new Satelite("io",1820,422000, dir_text_sat + "io.jpg", m_planetas, 
                 Color.white, 1.75,1.75,4/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/17,/*traslacion_false*/TRASLADO_ORB/14);
         astros.put(io.getNombre(),io);
         
-        Astro europa = new Satelite("europa",1561, 671000, dir_text_sat + "europa.jpg", new Material(), 
+        Astro europa = new Satelite("europa",1561, 671000, dir_text_sat + "europa.jpg", m_planetas, 
                 Color.white, 3.54,3.54,4/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/16,/*traslacion_false*/TRASLADO_ORB/13);
         astros.put(europa.getNombre(), europa);
         
-        Astro calisto = new Satelite("calisto",2410, 1880000, dir_text_sat + "calisto.jpg", new Material(), 
+        Astro calisto = new Satelite("calisto",2410, 1880000, dir_text_sat + "calisto.jpg", m_planetas, 
                 Color.white, 16.7, 16.7,5/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/14,/*traslacion_false*/TRASLADO_ORB/11);
         astros.put(calisto.getNombre(), calisto);
         
-        Astro titania = new Satelite("titania",788, 436000, dir_text_sat + "titania.jpg", new Material(), 
+        Astro titania = new Satelite("titania",788, 436000, dir_text_sat + "titania.jpg", m_planetas, 
                 Color.white, 8.7, 8.7,3/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/15,/*traslacion_false*/TRASLADO_ORB/12);
         astros.put(titania.getNombre(), titania);
         
-        Astro ariel = new Satelite("ariel", (float) 578.5, 190000, dir_text_sat + "ariel.jpg", new Material(), 
+        Astro ariel = new Satelite("ariel", (float) 578.5, 190000, dir_text_sat + "ariel.jpg", m_planetas, 
                 Color.white, 2.52,2.52,3/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/18,/*traslacion_false*/TRASLADO_ORB/13);
         astros.put(titania.getNombre(), titania);
         
-        Astro miranda = new Satelite("miranda",236, 130000 ,dir_text_sat + "miranda.jpg", new Material(), 
+        Astro miranda = new Satelite("miranda",236, 130000 ,dir_text_sat + "miranda.jpg", m_planetas, 
                 Color.white, 1.41,1.41,2/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/TRASLADO_SOL/19,/*traslacion_false*/TRASLADO_ORB/14);
         astros.put(miranda.getNombre(), miranda);
         
-        Astro triton = new Satelite("triton", (float) 1353.5, 354760, dir_text_sat + "triton.jpg", new Material(), 
+        Astro triton = new Satelite("triton", (float) 1353.5, 354760, dir_text_sat + "triton.jpg", m_planetas, 
                 Color.white, -5.88,-5.88,4/*radio_false*/,/*distancia_false*/5,
                 /*rotacion_false*/-TRASLADO_SOL/15,/*traslacion_false*/TRASLADO_ORB/-12);
         astros.put(triton.getNombre(), triton);
@@ -175,15 +186,15 @@ public class Universo {
         // rotación y traslación expresados en días
         // *******************************************************************/
         
-        Astro mercurio = new Planeta("mercurio", (float) 2439.7, (float) 57.8, dir_text_pla + "mercurio.jpg", new Material(), 
+        Astro mercurio = new Planeta("mercurio", (float) 2439.7, (float) 57.8, dir_text_pla + "mercurio.jpg", m_planetas, 
                 Color.white, 58.6, 87.6, (Estrella) sol, null,6/*radio_false*/,
                 15/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/10,/*traslacion_false*/TRASLADO_ORB/9);
         
-        Astro venus = new Planeta("venus",6052, (float) 108.2, dir_text_pla + "venus.jpg", new Material(), 
+        Astro venus = new Planeta("venus",6052, (float) 108.2, dir_text_pla + "venus.jpg", m_planetas, 
                 Color.white, 243 , 224.5, (Estrella) sol, null,8/*radio_false*/,
                 25/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/5,/*traslacion_false*/TRASLADO_ORB/8);
         
-        Astro tierra = new Planeta("tierra", 6378, (float) 149.6, dir_text_pla + "tierra.jpg", new Material(), 
+        Astro tierra = new Planeta("tierra", 6378, (float) 149.6, dir_text_pla + "tierra.jpg", m_planetas, 
                 Color.white, 1, 365.25, (Estrella) sol, new HashMap(),8/*radio_false*/,
                 35/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/8);
         
@@ -191,7 +202,7 @@ public class Universo {
             
             
             
-        Astro marte = new Planeta("marte", (float) 3393.5, (float) 227.9, dir_text_pla + "marte.jpg", new Material(), 
+        Astro marte = new Planeta("marte", (float) 3393.5, (float) 227.9, dir_text_pla + "marte.jpg", m_planetas, 
                 Color.white, 1.03, 686.6, (Estrella) sol, new HashMap(),6/*radio_false*/,
                 45/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/7);
         
@@ -199,17 +210,17 @@ public class Universo {
             ((Planeta) marte).addSatelite((Satelite) deimos);
             
             
-        Astro jupiter = new Planeta("jupiter",71492, (float) 778.5, dir_text_pla + "jupiter.jpg", new Material(), 
+        Astro jupiter = new Planeta("jupiter",71492, (float) 778.5, dir_text_pla + "jupiter.jpg", m_planetas, 
                 Color.white, 0.414, 4331.86, (Estrella) sol, new HashMap(),/*radio_false*/15,
                 60/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/5);
         
             ((Planeta) jupiter).addSatelite((Satelite) io);
             ((Planeta) jupiter).addSatelite((Satelite) europa);
             ((Planeta) jupiter).addSatelite((Satelite) calisto);
-        Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", new Material(), 
+        Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", m_planetas, 
                 Color.white, 0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13,
                 80/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
-            Anillo anillo_a = new Anillo("anillo a",saturno.getRadio() * 1.5, dir_text_pla + "anillo_saturno.png",new Material(),Color.white);
+            Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.5, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
             saturno.addAnillo(anillo_a);
              
              
@@ -218,7 +229,7 @@ public class Universo {
             // añadir anillo C
             
             
-        Astro urano = new Planeta("urano", 25554, 2877, dir_text_pla + "urano.jpg", new Material(), 
+        Astro urano = new Planeta("urano", 25554, 2877, dir_text_pla + "urano.jpg", m_planetas, 
                 Color.white, 0.718, 30684, (Estrella) sol, new HashMap(),/*radio_false*/10,
                 90/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/23,/*traslacion_false*/TRASLADO_ORB/2);
         
@@ -227,7 +238,7 @@ public class Universo {
             ((Planeta) urano).addSatelite((Satelite) miranda);
             
             
-        Astro neptuno = new Planeta("neptuno", 24769, 4498, dir_text_pla + "neptuno.jpg", new Material(), 
+        Astro neptuno = new Planeta("neptuno", 24769, 4498, dir_text_pla + "neptuno.jpg", m_planetas, 
                 Color.white, 0.6745, 60189, (Estrella) sol, new HashMap(),/*radio_false*/10,
                 100/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/24,/*traslacion_false*/TRASLADO_ORB);
         
@@ -283,6 +294,8 @@ public class Universo {
         View view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
+        
+        
         
         return (new SimpleUniverse(viewingPlatform,viewer));
 
