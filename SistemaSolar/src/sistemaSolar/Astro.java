@@ -40,7 +40,6 @@ public abstract class Astro extends BranchGroup{
     
     protected Texture textura;
     protected Material material;
-    protected Color color;
     
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
@@ -52,7 +51,7 @@ public abstract class Astro extends BranchGroup{
     }
     
     public Astro(String nombre, float radio, float distancia,
-            String archivo_textura, Material material, Color color,
+            String archivo_textura, Material material,
             double rotacion, double traslacion, float radio_false,
             float distancia_false, float rotacion_false, float traslacion_false){
         
@@ -65,7 +64,7 @@ public abstract class Astro extends BranchGroup{
         this.traslacion_false = traslacion_false;
         this.material = material;
         
-        setApariencia(archivo_textura, material, color);
+        setApariencia(archivo_textura, material);
         setMovimiento(rotacion, traslacion);
     }
     
@@ -78,7 +77,7 @@ public abstract class Astro extends BranchGroup{
         return tg;
     }
     
-    public void setApariencia(String archivo_textura, Material material, Color color){
+    public void setApariencia(String archivo_textura, Material material){
         apariencia = new Appearance();
         this.material = material;
         
@@ -123,6 +122,8 @@ public abstract class Astro extends BranchGroup{
     public boolean traslada(){
         return (t_traslacion > 0);
     }
+    
+    
     
     public abstract void makeTransform();
 

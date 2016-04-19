@@ -6,7 +6,6 @@
  */
 package sistemaSolar;
 
-import java.awt.Color;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
 
@@ -15,11 +14,11 @@ public class Satelite extends Astro {
     private Planeta planeta;
     
     public Satelite(String nombre, float radio, float distancia, 
-            String archivo_textura, Material material, Color c,
+            String archivo_textura, Material material, 
             double t_rotacion, double t_traslacion, float radio_false,
             float distancia_false, float rotacion_false, float traslacion_false) {
         
-        super(nombre, radio, distancia, archivo_textura, material, c, t_rotacion, 
+        super(nombre, radio, distancia, archivo_textura, material, t_rotacion, 
                 t_traslacion, radio_false, distancia_false, rotacion_false, traslacion_false);
         this.planeta = null;
     }
