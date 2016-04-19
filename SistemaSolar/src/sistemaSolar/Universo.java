@@ -220,14 +220,15 @@ public class Universo {
         Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", m_planetas, 
                 Color.white, 0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13,
                 80/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
-            Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.5, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
+            Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.7, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
+            //Anillo anillo_b = new Anillo("anillo b",saturno.getRadioFalse()* 1.8, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
+            //Anillo anillo_c = new Anillo("anillo c",saturno.getRadioFalse()* 2.0, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
+
             saturno.addAnillo(anillo_a);
-             
-             
-            // añadir anillo A
-            // añadir anillo B
-            // añadir anillo C
+            //saturno.addAnillo(anillo_b);
+            //saturno.addAnillo(anillo_c);
             
+            /*********  3 anillos representados en una textura ************/
             
         Astro urano = new Planeta("urano", 25554, 2877, dir_text_pla + "urano.jpg", m_planetas, 
                 Color.white, 0.718, 30684, (Estrella) sol, new HashMap(),/*radio_false*/10,
