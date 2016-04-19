@@ -42,8 +42,6 @@ public abstract class Astro extends BranchGroup{
     protected Material material;
     protected Color color;
     
-    protected Punto posicion;
-    
     protected double t_rotacion, t_traslacion, ang_traslacion;
     
     public Astro(String nombre, float radio, float distancia){
@@ -125,15 +123,6 @@ public abstract class Astro extends BranchGroup{
     public boolean traslada(){
         return (t_traslacion > 0);
     }
-    
-    public Punto getLocalizacion(){
-        return posicion;
-    }
-    
-    public void desplaza(float x, float y, float z){
-        posicion.relocate(posicion.getX()+x, posicion.getY()+y, posicion.getZ()+z);
-    }
-    
     
     public abstract void makeTransform();
 
