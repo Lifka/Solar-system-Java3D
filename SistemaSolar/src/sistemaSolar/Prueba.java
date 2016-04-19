@@ -15,6 +15,7 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.Node;
 import javax.media.j3d.PointLight;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -91,8 +92,13 @@ public class Prueba {
         for(int i = 0; i < astros_array.size(); i++){
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
-                System.out.println(((Planeta) astro).nombre);
+                // TRANSFORMS
                 astro.makeTransform();
+                
+                // PICKING
+                astro.setCapability(Node.ENABLE_PICK_REPORTING);
+                
+                // AÑADIR ASTRO A LA RAIZ
                 raiz.addChild(astro);
             }
         }
