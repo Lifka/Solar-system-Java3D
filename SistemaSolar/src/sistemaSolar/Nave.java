@@ -119,38 +119,48 @@ public class Nave {
 
     public TransformGroup getMovimientoTransform(){
         
-        float[] scale = {1.0f, 1.0f, 1.0f, 1.0f,
-                    1.0f, 1.0f, 1.0f, 1.0f};
+        float[] scale = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
         
-        float[] alphas = {0.0f, 0.33f, 0.67f, 1.0f,
-                    0.0f, 0.33f, 0.67f, 1.0f};
+        float[] alphas = {0.0f, 0.15f, 0.18f, 0.30f, 0.31f,0.6f,0.61f,0.7f ,0.73f,0.85f,0.86f, 1.0f};
         
         Point3f [] positions = {
-                new Point3f(15.0f, 0.0f, 0.0f), new Point3f(20.0f, 1.0f, 0.0f),
-                new Point3f(30.0f, 0.0f, 0.0f), new Point3f(40.0f, 0.0f, 0.0f),
-                new Point3f(30.0f, 0.0f, 4.0f), new Point3f(20.0f, 0.0f, 4.0f),
-                new Point3f(15.0f, 0.0f, 4.0f), new Point3f(5.0f, 0.0f, 0.0f)
+                new Point3f(15.0f, 0.0f, 0.0f), 
+                new Point3f(20.0f, 5.0f, 0.0f),
+                new Point3f(20.0f, 5.0f, 0.0f),  // giro
+                new Point3f(15.0f, 0.0f, -4.0f),
+                new Point3f(15.0f, 0.0f, -4.0f), // giro
+                new Point3f(-10.0f, 0.0f, -4.0f),
+                new Point3f(-10.0f, 0.0f, -4.0f), // giro
+                new Point3f(-10.0f, 0.0f, 10.0f), 
+                new Point3f(-10.0f, 0.0f, 10.0f), //giro
+                new Point3f(15.0f, 0.0f, 10.0f),
+                new Point3f(15.0f, 0.0f, 10.0f), //giro
+                new Point3f(15.0f, 0.0f, 0.0f) 
         } ;
         
-        Quat4f[] rotations = new Quat4f [8];
-        for(int i = 0; i < 8; i++)
+        Quat4f[] rotations = new Quat4f [12];
+        for(int i = 0; i < 12; i++)
             rotations[i] = new Quat4f();
         
-        rotations[0].set(new AxisAngle4f(1.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
-        rotations[1].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
-        rotations[2].set(new AxisAngle4f(1.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[0].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[1].set(new AxisAngle4f(1.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[2].set(new AxisAngle4f(-1.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
         rotations[3].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
-        rotations[4].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[4].set(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float)Math.toRadians(90)));
         rotations[5].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
-        rotations[6].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[6].set(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float)Math.toRadians(180)));
         rotations[7].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[8].set(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float)Math.toRadians(-90)));
+        rotations[9].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
+        rotations[10].set(new AxisAngle4f(0.0f, 1.0f, 0.0f, (float)Math.toRadians(30)));
+        rotations[11].set(new AxisAngle4f(0.0f, 0.0f, 0.0f, (float)Math.toRadians(60)));
         
         
         Transform3D transform = new Transform3D();
         TransformGroup tg = new TransformGroup(transform);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)2000000/5, 0, 0 ,0, 0, 0);
+        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)200000/5, 0, 0 ,0, 0, 0);
        
         RotPosScalePathInterpolator interpolator = new RotPosScalePathInterpolator(
                 timer, tg, transform, alphas, rotations, positions, scale);
