@@ -60,7 +60,7 @@ public class Anillo extends BranchGroup{
         
         apariencia.setMaterial(this.material);
         
-        cilindro = new Cylinder((float) (radio/3), (float) 0.1, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
+        cilindro = new Cylinder((float) (radio/3), (float) 0.01, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
         addChild(cilindro);
     }
 }

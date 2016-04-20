@@ -66,7 +66,7 @@ public class OrbitCircle extends BranchGroup{
         
         apariencia.setMaterial(this.material);
         
-        cilindro = new Cylinder((float) (radio), (float) 0.0001, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
+        cilindro = new Cylinder((float) (radio), (float) 0.0001, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 500,500, apariencia);
         addChild(cilindro);
     }
     
