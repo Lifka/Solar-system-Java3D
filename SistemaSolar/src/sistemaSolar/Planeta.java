@@ -6,6 +6,7 @@
 package sistemaSolar;
 
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Canvas3D;
@@ -99,12 +100,12 @@ public class Planeta extends Astro{
         TransformGroup rota = getRotartransform(rotacion_false);
         TransformGroup distance = getDistanceTransform();
         TransformGroup traslada = getRotartransform(traslacion_false);
+        putOrbit();
         rota.addChild(esfera);
         
         for (Anillo a : anillos){
             inclinacion.addChild(a);
         }
-        //rota.addChild(inclinacion);
         
         for (Satelite value : satelites.values()) {
             value.makeTransform(canvas);
@@ -115,6 +116,12 @@ public class Planeta extends Astro{
         distance.addChild(inclinacion);
         traslada.addChild(distance);
         addChild(traslada);
+    }
+    
+    
+    public void putOrbit(){
+        OrbitCircle orbita = new OrbitCircle(nombre, getDistancia(), material, Color.white);
+        addChild(orbita);
     }
    
     
