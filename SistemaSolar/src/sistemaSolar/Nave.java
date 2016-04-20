@@ -13,7 +13,6 @@ import com.sun.j3d.loaders.objectfile.ObjectFile;
 import java.io.FileNotFoundException;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
