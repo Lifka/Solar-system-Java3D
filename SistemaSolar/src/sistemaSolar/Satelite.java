@@ -6,6 +6,7 @@
  */
 package sistemaSolar;
 
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
 
@@ -33,7 +34,7 @@ public class Satelite extends Astro {
     
     
     @Override
-    public void makeTransform(){
+    public void makeTransform(Canvas3D canvas){
         TransformGroup rota = getRotartransform(rotacion_false);
         TransformGroup distance = getDistanceTransform();
         TransformGroup traslada = getRotartransform(traslacion_false);

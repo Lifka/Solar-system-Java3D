@@ -32,8 +32,12 @@ public class Prueba {
         // *************** CANVAS
         // Crear canvas (pantalla)
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
+        Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
+
         // Tamaño canvas
         canvas.setSize(10000, 10000);
+        canvas2.setSize(10000,10000);
+        
         // Ventana
         Visualization visualizationWindows = new Visualization(canvas);
         visualizationWindows.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -58,14 +62,8 @@ public class Prueba {
         BranchGroup background = universe.createBackground();
         
         // *************** SOL
-        // Definimos el objeto
-        // Material:
-        Material m = new Material();
-        m.setEmissiveColor(255, 100, 80);
-        m.setAmbientColor(255,100,80);
-        // Lo creamos
         Astro sol = astros.get("sol");
-        sol.makeTransform();
+        sol.makeTransform(canvas);
 
         // Transformaciones del objeto (van en un transform group)
         Transform3D t3d = new Transform3D();
@@ -93,10 +91,7 @@ public class Prueba {
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
                 // TRANSFORMS
-                astro.makeTransform();
-                
-                // PICKING
-                astro.setCapability(Node.ENABLE_PICK_REPORTING);
+                astro.makeTransform(canvas);
                 
                 // AÑADIR ASTRO A LA RAIZ
                 raiz.addChild(astro);
@@ -105,13 +100,12 @@ public class Prueba {
         
         
         
-        
-        
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
        raiz.addChild(background);
        raiz.addChild(new Nave().getNaveBranch());
-        simpleUniverse.addBranchGraph(raiz);
+       raiz.compile();
+       simpleUniverse.addBranchGraph(raiz);
        
     }
     

@@ -8,6 +8,7 @@ package sistemaSolar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
 
@@ -93,7 +94,7 @@ public class Planeta extends Astro{
     
     
     @Override
-    public void makeTransform(){
+    public void makeTransform(Canvas3D canvas){
         TransformGroup inclinacion = getInclinationTransform();
         TransformGroup rota = getRotartransform(rotacion_false);
         TransformGroup distance = getDistanceTransform();
@@ -106,7 +107,7 @@ public class Planeta extends Astro{
         //rota.addChild(inclinacion);
         
         for (Satelite value : satelites.values()) {
-            value.makeTransform();
+            value.makeTransform(canvas);
             rota.addChild(value);
         }
                 

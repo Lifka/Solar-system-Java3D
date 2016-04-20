@@ -126,7 +126,7 @@ public class Universo {
         
         // ESTRELLAS --> SOL
         Astro sol = new Estrella("sol", 696342, dir_text_sol + "sol.jpg", m_sol, 
-                26, 10,/*radio_false*/25*ESCALE,/*distancia_false*/5*ESCALE,
+                26, 10,/*radio_false*/25*ESCALE,/*distancia_false*/0*ESCALE,
                 /*rotacion_false*/TRASLADO_SOL,/*traslacion_false*/0);
         astros.put(sol.getNombre(),sol);
         
@@ -286,7 +286,7 @@ public class Universo {
         OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
         orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
         
-        orbit.setZoomFactor(1.0f);
+        orbit.setZoomFactor(5.0f);
         
         viewingPlatform.setViewPlatformBehavior(orbit);
     
