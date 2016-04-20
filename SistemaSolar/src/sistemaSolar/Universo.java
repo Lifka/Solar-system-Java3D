@@ -190,15 +190,15 @@ public class Universo {
         
         Astro mercurio = new Planeta("mercurio", (float) 2439.7, (float) 57.8, dir_text_pla + "mercurio.jpg", m_planetas, 
                 58.6, 87.6, (Estrella) sol, null,6*ESCALE/*radio_false*/,
-                15*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/10,/*traslacion_false*/TRASLADO_ORB/9);
+                10*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/10,/*traslacion_false*/TRASLADO_ORB/14);
         
         Astro venus = new Planeta("venus",6052, (float) 108.2, dir_text_pla + "venus.jpg", m_planetas, 
                 243 , 224.5, (Estrella) sol, null,8*ESCALE/*radio_false*/,
-                25*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/5,/*traslacion_false*/TRASLADO_ORB/8);
+                20*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/5,/*traslacion_false*/TRASLADO_ORB/11);
         
         Astro tierra = new Planeta("tierra", 6378, (float) 149.6, dir_text_pla + "tierra.jpg", m_planetas, 
                  1, 365.25, (Estrella) sol, new HashMap(),8*ESCALE/*radio_false*/,
-                35*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/8);
+                30*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/8);
         
             ((Planeta) tierra).addSatelite((Satelite) luna);
             
@@ -206,7 +206,7 @@ public class Universo {
             
         Astro marte = new Planeta("marte", (float) 3393.5, (float) 227.9, dir_text_pla + "marte.jpg", m_planetas, 
                 1.03, 686.6, (Estrella) sol, new HashMap(),6*ESCALE/*radio_false*/,
-                45*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/7);
+                40*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/20,/*traslacion_false*/TRASLADO_ORB/7);
         
             ((Planeta) marte).addSatelite((Satelite) fobos);
             ((Planeta) marte).addSatelite((Satelite) deimos);
@@ -220,8 +220,8 @@ public class Universo {
             ((Planeta) jupiter).addSatelite((Satelite) europa);
             ((Planeta) jupiter).addSatelite((Satelite) calisto);
         Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", m_planetas, 
-                 0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13,
-                80/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
+                 0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13*ESCALE,
+                80*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
             Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.7, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
             //Anillo anillo_b = new Anillo("anillo b",saturno.getRadioFalse()* 1.8, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
             //Anillo anillo_c = new Anillo("anillo c",saturno.getRadioFalse()* 2.0, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
