@@ -53,7 +53,8 @@ public class Estrella extends Astro{
     
     @Override
     public void makeTransform(Canvas3D canvas){
-        TransformGroup rota = getRotartransform(rotacion_false);
+
+        TransformGroup rota = getRotartransform(rotacion_false,1);
 
         // PICK
         PickForStop ps = new PickForStop(canvas);

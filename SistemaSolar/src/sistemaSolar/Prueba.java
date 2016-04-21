@@ -96,6 +96,7 @@ public class Prueba {
             }
         }
         
+        ((Planeta)astros.get("tierra")).cloudEnabled(true, "src/texturas_planetas/cloud.png");
         
         
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
