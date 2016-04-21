@@ -1,8 +1,7 @@
 /*
-
-    Gallardo Morales, Juan Carlos - jcgallardomorales@gmail.com
-    Izquierdo Vera, Javier - javieriizquierdovera@gmail.com
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package sistemaSolar;
 
@@ -18,7 +17,13 @@ import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TransparencyAttributes;
 
-public class Anillo extends BranchGroup{
+/**
+ *
+ * @author lifka
+ */
+public class OrbitCircle extends BranchGroup{
+    
+    String archivo_textura = "src/texturas_planetas/orbita.png";
     protected Primitive cilindro;
     protected Appearance apariencia;
     
@@ -32,20 +37,21 @@ public class Anillo extends BranchGroup{
     
     protected double t_rotacion;
     
-    public Anillo(String nombre, Astro astro){
+    public OrbitCircle(String nombre, Astro astro){
         this.nombre = nombre;
-        this.radio = astro.getRadio()*1.5;
+        this.radio = astro.getDistancia();
         cilindro = new Cylinder();
     }
-    public Anillo(String nombre, double radio, String archivo_textura, Material material, Color color){
+    
+    public OrbitCircle(String nombre, double radio, Material material, Color color){
         
         this.nombre = nombre;
         this.radio = radio;
         
-        setApariencia(archivo_textura, material, color);
+        setApariencia(material, color);
     }
     
-    public void setApariencia(String archivo_textura, Material material, Color color){
+    public void setApariencia(Material material, Color color){
         this.material = material;
         apariencia = new Appearance();
         
@@ -60,7 +66,8 @@ public class Anillo extends BranchGroup{
         
         apariencia.setMaterial(this.material);
         
-        cilindro = new Cylinder((float) (radio/3), (float) 0.01, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50,50, apariencia);
+        cilindro = new Cylinder((float) (radio), (float) 0.0001, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 500,500, apariencia);
         addChild(cilindro);
     }
+    
 }
