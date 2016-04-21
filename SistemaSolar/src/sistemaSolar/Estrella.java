@@ -51,9 +51,9 @@ public class Estrella extends Astro{
     
     @Override
     public void makeTransform(Canvas3D canvas){
-        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup rota = getRotartransform(rotacion_false, 1);
         TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false);
+        TransformGroup traslada = getRotartransform(traslacion_false, 1);
         TransformGroup pick = new TransformGroup();
         
         rota.addChild(esfera);

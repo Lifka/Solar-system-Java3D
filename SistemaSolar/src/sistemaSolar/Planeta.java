@@ -6,12 +6,19 @@
 package sistemaSolar;
 
 
+import com.sun.j3d.utils.geometry.Primitive;
+import com.sun.j3d.utils.geometry.Sphere;
+import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.Appearance;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.Texture;
+import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TransformGroup;
+import javax.media.j3d.TransparencyAttributes;
 
 /**
  *
@@ -97,9 +104,9 @@ public class Planeta extends Astro{
     @Override
     public void makeTransform(Canvas3D canvas){
         TransformGroup inclinacion = getInclinationTransform();
-        TransformGroup rota = getRotartransform(rotacion_false);
+        TransformGroup rota = getRotartransform(rotacion_false, 1);
         TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false);
+        TransformGroup traslada = getRotartransform(traslacion_false, 1);
         putOrbit();
         rota.addChild(esfera);
         
@@ -122,6 +129,36 @@ public class Planeta extends Astro{
     public void putOrbit(){
         OrbitCircle orbita = new OrbitCircle(nombre, getDistancia(), material, Color.white);
         addChild(orbita);
+    }
+    
+    
+    public void cloudEnabled(boolean enable, String dirtext){
+            
+            
+        Material material_cloud = new Material();
+        Appearance appear = new Appearance();
+        Texture cloudTexture = new TextureLoader(dirtext, null).getTexture();
+        
+        TextureAttributes at = new TextureAttributes();
+        at.setTextureMode(TextureAttributes.MODULATE);
+        TransparencyAttributes ta = new TransparencyAttributes(TransparencyAttributes.BLENDED,0.5f);
+        
+        appear.setTexture(cloudTexture);
+        appear.setTextureAttributes(at);
+        appear.setTransparencyAttributes(ta);
+        
+        appear.setMaterial(material_cloud);
+        
+        Sphere cloud_sphere = new Sphere((float)((radio_false/4)*1.05), Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, appear);
+        
+        TransformGroup rota = getRotartransform(10000, -1);
+            
+        if (enable){
+            rota.addChild(cloud_sphere);
+            esfera.addChild(rota);
+        } else {
+            esfera.removeChild(rota);
+        }
     }
    
     
