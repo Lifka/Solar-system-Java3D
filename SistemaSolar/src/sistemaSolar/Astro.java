@@ -140,9 +140,10 @@ public abstract class Astro extends BranchGroup{
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), radio_false/4);
         rot_interpolator.setSchedulingBounds(bounds);
         
-        
         // añadimos al TransformGroup la animación y la figura
+        tg.setUserData(timer);
         tg.addChild(rot_interpolator);
+        
         return(tg);
     }
     

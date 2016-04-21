@@ -9,9 +9,11 @@ package sistemaSolar;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Point3d;
 
 /**
  *
@@ -101,6 +103,14 @@ public class Planeta extends Astro{
         TransformGroup distance = getDistanceTransform();
         TransformGroup traslada = getRotartransform(traslacion_false);
         putOrbit();
+        
+        PickForStop ps = new PickForStop(canvas);
+        ps.stopTransform(this);
+        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), radio_false/4);
+        ps.setSchedulingBounds(bounds);
+        rota.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
+        rota.addChild(ps);
+        
         rota.addChild(esfera);
         
         for (Anillo a : anillos){
