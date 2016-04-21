@@ -49,93 +49,39 @@ public class Nave {
           System.exit(1);
         }
         
-       
-        
-        
-        
         Transform3D transform = new Transform3D();
         transform.rotX(5);
-        transform.setScale(0.4);
+        transform.setScale(0.2);
         TransformGroup inclinacion = new TransformGroup(transform);
         inclinacion.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	inclinacion.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
-        
-      /*  TransformGroup mov = getRun();
-        TransformGroup rotation = getGirosTransform();
-        */
-        
         TransformGroup mov = getMovimientoTransform();
         inclinacion.addChild(modelo.getSceneGroup());
         mov.addChild(inclinacion);
-      /*  mov.addChild(inclinacion);
-        rotation.addChild(mov);*/
-        
         
         return mov;
-  
-   }
-    
-    
-   public TransformGroup getRun(){
-        Transform3D transform = new Transform3D();
-        TransformGroup tg = new TransformGroup(transform);
-        tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)2000000/5, 0, 0 ,0, 0, 0);
-       
-        PositionInterpolator interpolador = new PositionInterpolator(timer, tg);
-       
-        BoundingSphere bounds = new BoundingSphere();
-        interpolador.setSchedulingBounds(bounds);
-        interpolador.setStartPosition(5);
-        interpolador.setEndPosition(50);
-        
-        
-        // añadimos al TransformGroup la animación y la figura
-        tg.addChild(interpolador);
-        
-        return tg;
-   } 
-   
-   
-   public TransformGroup getGirosTransform(){
-        Transform3D transform = new Transform3D();
-        TransformGroup tg = new TransformGroup(transform);
-        tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)500000/5, 0, 0 ,0, 0, 0);
-       
-        RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, transform, 0.0f, (float) Math.PI*2.0f);
-       
-        BoundingSphere bounds = new BoundingSphere();
-        rot_interpolator.setSchedulingBounds(bounds);
-        
-        tg.addChild(rot_interpolator);
-        
-        return tg;
-       
    }
 
     public TransformGroup getMovimientoTransform(){
-        
+        float scale_tam = 0.5f;
         float[] scale = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
         
         float[] alphas = {0.0f, 0.15f, 0.18f, 0.30f, 0.31f,0.6f,0.61f,0.7f ,0.73f,0.85f,0.86f, 1.0f};
         
         Point3f [] positions = {
-                new Point3f(15.0f, 0.0f, 0.0f), 
-                new Point3f(20.0f, 5.0f, 0.0f),
-                new Point3f(20.0f, 5.0f, 0.0f),  // giro
-                new Point3f(15.0f, 0.0f, -4.0f),
-                new Point3f(15.0f, 0.0f, -4.0f), // giro
-                new Point3f(-10.0f, 0.0f, -4.0f),
-                new Point3f(-10.0f, 0.0f, -4.0f), // giro
-                new Point3f(-10.0f, 0.0f, 10.0f), 
-                new Point3f(-10.0f, 0.0f, 10.0f), //giro
-                new Point3f(15.0f, 0.0f, 10.0f),
-                new Point3f(15.0f, 0.0f, 10.0f), //giro
-                new Point3f(15.0f, 0.0f, 0.0f) 
+                new Point3f(15.0f*scale_tam, 0.0f, 0.0f), 
+                new Point3f(20.0f*scale_tam, 5.0f*scale_tam, 0.0f),
+                new Point3f(20.0f*scale_tam, 5.0f*scale_tam, 0.0f),  // giro
+                new Point3f(15.0f*scale_tam, 0.0f, -4.0f*scale_tam),
+                new Point3f(15.0f*scale_tam, 0.0f, -4.0f*scale_tam), // giro
+                new Point3f(-10.0f*scale_tam, 0.0f, -4.0f*scale_tam),
+                new Point3f(-10.0f*scale_tam, 0.0f, -4.0f*scale_tam), // giro
+                new Point3f(-10.0f*scale_tam, 0.0f, 10.0f*scale_tam), 
+                new Point3f(-10.0f*scale_tam, 0.0f, 10.0f*scale_tam), //giro
+                new Point3f(15.0f*scale_tam, 0.0f, 10.0f*scale_tam),
+                new Point3f(15.0f*scale_tam, 0.0f, 10.0f*scale_tam), //giro
+                new Point3f(15.0f*scale_tam, 0.0f, 0.0f) 
         } ;
         
         Quat4f[] rotations = new Quat4f [12];

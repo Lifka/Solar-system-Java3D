@@ -33,8 +33,9 @@ public class PickForStop extends Behavior{
     public void stopTransform(BranchGroup bg){
         System.out.println("********** STOP TRANSFORM ***************");
         pickCanvas = new PickCanvas ( canvas , bg ) ;
-        pickCanvas.setTolerance(10.0f);
+        pickCanvas.setTolerance(2.0f);
         pickCanvas.setMode(PickInfo.PICK_BOUNDS);
+        pickCanvas.setFlags(PickInfo.NODE | PickInfo.CLOSEST_GEOM_INFO | PickInfo.SCENEGRAPHPATH);
         setEnable(true);
     }
     

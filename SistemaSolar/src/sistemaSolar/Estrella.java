@@ -9,6 +9,7 @@ package sistemaSolar;
 import java.util.ArrayList;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.Node;
 import javax.media.j3d.TransformGroup;
 
 public class Estrella extends Astro{
@@ -57,12 +58,15 @@ public class Estrella extends Astro{
         
         rota.addChild(esfera);
         
+        // PICK
         PickForStop ps = new PickForStop(canvas);
         ps.stopTransform(this);
         pick.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         pick.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         pick.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
+        pick.setCapability(Node.ENABLE_PICK_REPORTING);
         pick.addChild(ps);
+        // END PICK
         
         distance.addChild(rota);
         traslada.addChild(distance);

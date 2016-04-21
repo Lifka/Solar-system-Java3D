@@ -38,7 +38,7 @@ public class Universo {
     private Canvas3D aCanvas;
     final int TRASLADO_SOL = 200000;
     final int TRASLADO_ORB = 200000;
-    final float ESCALE = 0.3f;
+    final float ESCALE = 0.1f;
     
 
     public Universo (String archivo_text,Canvas3D aCanvas){
@@ -312,8 +312,8 @@ public class Universo {
         background.setApplicationBounds(bound);
         
         Appearance apariencia = new Appearance();
-        Texture textura = new TextureLoader ("src/background/back.jpg" , null).getTexture();
-        apariencia.setTexture(textura);
+        Texture text = new TextureLoader ("src/background/back.jpg" , null).getTexture();
+        apariencia.setTexture(text);
         
         Sphere esfera = new Sphere(1.5f, Primitive.GENERATE_TEXTURE_COORDS |
                 Primitive.GENERATE_NORMALS_INWARD, 500, apariencia );
