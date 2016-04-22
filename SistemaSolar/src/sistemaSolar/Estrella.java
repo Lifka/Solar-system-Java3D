@@ -8,10 +8,12 @@ package sistemaSolar;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.Node;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Point3d;
 
 public class Estrella extends Astro{
     
@@ -52,27 +54,21 @@ public class Estrella extends Astro{
     
     @Override
     public void makeTransform(Canvas3D canvas){
-        TransformGroup rota = getRotartransform(rotacion_false, 1);
-        TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false, 1);
-        TransformGroup pick = new TransformGroup();
-        
-        rota.addChild(esfera);
-        
+
+        TransformGroup rota = getRotartransform(rotacion_false,1);
+
         // PICK
         PickForStop ps = new PickForStop(canvas);
         ps.stopTransform(this);
-        pick.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-        pick.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        pick.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
-        pick.setCapability(Node.ENABLE_PICK_REPORTING);
-        pick.addChild(ps);
+        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), radio_false/4);
+        ps.setSchedulingBounds(bounds);
+        rota.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
+        rota.addChild(ps);
         // END PICK
         
-        distance.addChild(rota);
-        traslada.addChild(distance);
-        pick.addChild(traslada);
-        addChild(pick);
+        rota.addChild(esfera);
+        
+        addChild(rota);
     }
     
 }
