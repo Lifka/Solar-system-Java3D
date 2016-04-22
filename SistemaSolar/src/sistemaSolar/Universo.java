@@ -22,6 +22,8 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.PhysicalBody;
+import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.PointLight;
 import javax.media.j3d.Texture;
 import javax.media.j3d.Transform3D;
@@ -276,8 +278,8 @@ public class Universo {
         // Transformación de vista -> dónde se está , a dónde se mira , Vup
         TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
         Transform3D viewTransform3D = new Transform3D ( );
-        viewTransform3D.lookAt (new Point3d (20 ,20 ,20 ),
-                new Point3d (0, 0, 0), new Vector3d (0 ,1 ,0));
+        viewTransform3D.lookAt (new Point3d (0 ,10 ,0 ),
+                new Point3d (0, 0, 0), new Vector3d (0 ,0 ,-1));
         
         viewTransform3D.invert();
         viewTransformGroup.setTransform(viewTransform3D);
@@ -292,11 +294,24 @@ public class Universo {
     
         
         /**************   VIEWER     **************/
-        
+     /*   
         Viewer viewer = new Viewer(aCanvas);
         View view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
+        */
+     
+        Viewer viewer = new Viewer(aCanvas);
+        View viewPlanta = viewer.getView();
+        viewPlanta.setPhysicalBody(new PhysicalBody());
+        viewPlanta.setPhysicalEnvironment(new PhysicalEnvironment());
+        viewPlanta.setProjectionPolicy(View.PARALLEL_PROJECTION);
+        viewPlanta.setScreenScalePolicy(View.SCALE_EXPLICIT);
+        viewPlanta.setScreenScale(0.1);
+        viewPlanta.setFrontClipDistance(10);
+        viewPlanta.setBackClipDistance(-10);
+        
+        viewPlanta.attachViewPlatform(viewingPlatform.getViewPlatform());
         
         
         
