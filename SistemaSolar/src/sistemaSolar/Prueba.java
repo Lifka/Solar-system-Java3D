@@ -22,9 +22,7 @@ import javax.vecmath.Color3f;
 
 public class Prueba {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         
         // *************** CANVAS

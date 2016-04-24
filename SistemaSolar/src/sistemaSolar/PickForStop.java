@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+    Gallardo Morales, Juan Carlos - jcgallardomorales@gmail.com
+    Izquierdo Vera, Javier - javieriizquierdovera@gmail.com
+
  */
 package sistemaSolar;
 
@@ -19,10 +20,6 @@ import javax.media.j3d.Shape3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupOnAWTEvent;
 
-/**
- *
- * @author jgallardo
- */
 public class PickForStop extends Behavior{
     private WakeupOnAWTEvent condicion;
     private Canvas3D canvas;
@@ -49,7 +46,6 @@ public class PickForStop extends Behavior{
 
     @Override
     public void processStimulus(Enumeration cond) {
-        System.out.println("****************** PROCESS STIMULUS ********************");
         WakeupOnAWTEvent c = (WakeupOnAWTEvent) cond.nextElement();
         AWTEvent[] e = c.getAWTEvent();
         MouseEvent m = (MouseEvent) e[0];
