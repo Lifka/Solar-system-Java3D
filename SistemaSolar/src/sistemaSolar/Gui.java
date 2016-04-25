@@ -7,20 +7,81 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import java.applet.Applet;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GraphicsConfiguration;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Label;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Material;
-import javax.media.j3d.Node;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 import javax.vecmath.Color3f;
 
-public class Prueba {
+public class Gui extends JFrame{
+    private static final int PLANTA = 0;
+    private static final int VISTAS = 1;
+    
+    Gui(Canvas3D canvas, String title, int mode){
+        
+        setTitle(title);
+        setLayout(new BorderLayout());
+        setSize(800, 600);
+        JPanel main_panel = new JPanel(new BorderLayout());
+         
+         
+        if (mode == PLANTA){
+            main_panel.add("North", new Label("Vista planta fija:"));
+            main_panel.add("Center", canvas);
+        } else if(mode == VISTAS){
+            JRadioButton nave = new JRadioButton("Nave");
+            JRadioButton luna = new JRadioButton("Luna");
+            JRadioButton perspectiva = new JRadioButton("Perspectiva", true);
+            ButtonGroup botones = new ButtonGroup();
+            botones.add(nave);
+            botones.add(luna);
+            botones.add(perspectiva);
+            
+            JPanel botones_panel = new JPanel(new BorderLayout());
+            
+              
+            botones_panel.setLayout(new GridBagLayout());
+            
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(1, 1, 1, 1);
+            
+            
+            botones_panel.add(new Label("Seleccione la cámara:"), gbc);
+            gbc.gridx++;
+            botones_panel.add(perspectiva, gbc);
+            gbc.gridx++;
+            botones_panel.add(nave, gbc);    
+            gbc.gridx++;
+            botones_panel.add(luna, gbc);
+            
+            main_panel.add(BorderLayout.NORTH, botones_panel);
+            
+            main_panel.add("Center", canvas);
+        }
+         
+        add(main_panel);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+         
+    }
 
     
     public static void main(String[] args) {
@@ -30,26 +91,21 @@ public class Prueba {
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
-        // Tamaño canvas
-        canvas.setSize(10000, 10000);
-        canvas2.setSize(10000,10000);
         
-        // Ventana
-        Visualization visualizationWindows = new Visualization(canvas);
-        visualizationWindows.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
              
         // *************** UNIVERSE
         // Crear Simple Universe
         Universo universe = new Universo(new String(), canvas);
         // Sale de nuestra propia clase
         SimpleUniverse simpleUniverse = universe.createUniverso();
+        
         // Crear los astros
         universe.crearSistemaSolar();
         HashMap<String,Astro> astros = universe.getAstros();
         ArrayList<Astro> astros_array = universe.getAstrosArray();
         
         // Hacemos visible la ventana
-        visualizationWindows.setVisible(true);
+       // visualizationWindows.setVisible(true);
         
         // Creamos el árbol
         BranchGroup raiz = new BranchGroup();
@@ -69,7 +125,7 @@ public class Prueba {
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
-        // Le damos la capacidad de rotar con el teclado
+        
         BoundingSphere bounds = new BoundingSphere();
         
         // Añadimos la luz puntual al sol
@@ -98,12 +154,14 @@ public class Prueba {
         
         
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
-        
+
        raiz.addChild(background);
        raiz.addChild(new Nave().getNaveBranch());
        raiz.compile();
        simpleUniverse.addBranchGraph(raiz);
        
+       Gui windows1 = new Gui(canvas, "Planta fija", PLANTA);
+       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);
     }
     
 }

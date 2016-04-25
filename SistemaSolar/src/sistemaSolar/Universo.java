@@ -294,13 +294,13 @@ public class Universo {
     
         
         /**************   VIEWER     **************/
-     /*   
+        
         Viewer viewer = new Viewer(aCanvas);
         View view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
-        */
-     
+        
+     /*
         Viewer viewer = new Viewer(aCanvas);
         View viewPlanta = viewer.getView();
         viewPlanta.setPhysicalBody(new PhysicalBody());
@@ -313,7 +313,7 @@ public class Universo {
         
         viewPlanta.attachViewPlatform(viewingPlatform.getViewPlatform());
         
-        
+        */
         
         return (new SimpleUniverse(viewingPlatform,viewer));
 
