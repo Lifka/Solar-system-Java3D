@@ -6,13 +6,10 @@
  */
 package sistemaSolar;
 
-import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import com.sun.j3d.utils.universe.Viewer;
-import com.sun.j3d.utils.universe.ViewingPlatform;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,19 +17,12 @@ import javax.media.j3d.Appearance;
 import javax.media.j3d.Background;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Locale;
 import javax.media.j3d.Material;
-import javax.media.j3d.PhysicalBody;
-import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.Texture;
-import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
-import javax.media.j3d.ViewPlatform;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
 
 public class Universo {
     private Nave nave;
@@ -50,7 +40,7 @@ public class Universo {
     public Universo (String archivo_text){
 //        this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
-        this.astros = new HashMap<String,Astro>();
+        this.astros = new HashMap();
     }
     
     public int getNumComponentes(){
@@ -130,8 +120,9 @@ public class Universo {
         */
         
         // ESTRELLAS --> SOL
+        
         Astro sol = new Estrella("sol", 696342, dir_text_sol + "sol.jpg", m_sol, 
-                26, 10,/*radio_false*/25*ESCALE,/*distancia_false*/0*ESCALE,
+                26,/*radio_false*/25*ESCALE,/*distancia_false*/0*ESCALE,
                 /*rotacion_false*/TRASLADO_SOL,/*traslacion_false*/0);
         astros.put(sol.getNombre(),sol);
         
@@ -227,7 +218,7 @@ public class Universo {
         Astro saturno = new Planeta("saturno",60268, 1433, dir_text_pla + "saturno.jpg", m_planetas, 
                  0.426, 10760.27, (Estrella) sol, null,/*radio_false*/13*ESCALE,
                 80*ESCALE/*distancia_false*/,/*rotacion_false*/TRASLADO_SOL/25,/*traslacion_false*/TRASLADO_ORB/3); 
-            Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.7, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
+            Anillo anillo_a = new Anillo("anillo a",saturno.getRadioFalse()* 1.7, dir_text_pla + "anillo_saturno.png",m_planetas);
             //Anillo anillo_b = new Anillo("anillo b",saturno.getRadioFalse()* 1.8, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
             //Anillo anillo_c = new Anillo("anillo c",saturno.getRadioFalse()* 2.0, dir_text_pla + "anillo_saturno.png",m_planetas,Color.white);
 

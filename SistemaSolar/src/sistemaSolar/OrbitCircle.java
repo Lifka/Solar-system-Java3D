@@ -8,7 +8,6 @@ package sistemaSolar;
 
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Primitive;
-import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
 import javax.media.j3d.Appearance;

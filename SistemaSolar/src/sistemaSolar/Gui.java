@@ -22,7 +22,6 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -120,7 +119,6 @@ public class Gui extends JFrame{
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
-        
              
         // *************** UNIVERSE
         // Crear Simple Universe
@@ -138,6 +136,7 @@ public class Gui extends JFrame{
         
         // Fondo
         BranchGroup background = universe.createBackground();
+        background.setPickable(false);
         
         // *************** SOL
         Astro sol = astros.get("sol");
@@ -154,9 +153,11 @@ public class Gui extends JFrame{
         
         // Añadimos la luz puntual al sol
         LuzPuntual lp = new LuzPuntual(new Color3f(Color.WHITE));
+        lp.setPickable(false);
         grupoArotar.addChild(lp);
         
         // Añadimos en el mismo nodo el objeto y el comportamiento
+        grupoArotar.setPickable(false);
         grupoArotar.addChild(sol);
         
         // Lo añadimos a la raiz
@@ -180,11 +181,18 @@ public class Gui extends JFrame{
        universe.simpleUniverse.getViewingPlatform().setNominalViewingTransform();
 
        raiz.addChild(background);
-       raiz.addChild(new Nave().getNaveBranch());
+       Nave nave = new Nave();
+       TransformGroup b_nave = nave.getNaveBranch();
+       b_nave.setPickable(false);
+       raiz.addChild(b_nave);
        
        PickForStop ps = new PickForStop(canvas,raiz);
        ps.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
        raiz.addChild(ps);
+       
+       PickForStop ps2 = new PickForStop(canvas2, raiz);
+       ps2.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
+       raiz.addChild(ps2);
        
        
        raiz.compile();
