@@ -57,9 +57,7 @@ public class PickForStop extends Behavior{
             Alpha timer = a.getTimerRotacion();
             
             if (timer != null){
-                boolean parado = timer.isPaused();
-
-                if (parado)
+                if (timer.isPaused())
                     timer.resume();
                 else
                     timer.pause();
