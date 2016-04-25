@@ -16,15 +16,26 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.RotPosScalePathInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.media.j3d.View;
+import javax.media.j3d.ViewPlatform;
 import javax.vecmath.AxisAngle4f;
+import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
 import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3d;
 
 public class Nave {
     
     private TransformGroup tg = new TransformGroup();
+    private Boolean has_view = false;
+    private View view;
     
     public Nave(){
+    }
+    
+    public void setView(View vista){
+        has_view = true;
+        view = vista;
     }
     
     
@@ -54,6 +65,27 @@ public class Nave {
         TransformGroup mov = getMovimientoTransform();
         inclinacion.addChild(modelo.getSceneGroup());
         mov.addChild(inclinacion);
+        
+          
+        if(has_view){
+            
+            Transform3D transformLook = new Transform3D ();
+            
+            transformLook.lookAt(new Point3d(0, 0, 0), new Point3d (0, 0, -1),
+                    new Vector3d(0, 1, 0));
+
+            transformLook.invert();
+
+            TransformGroup tgCamara = new TransformGroup(transformLook);
+        
+        
+            ViewPlatform vpPlanta = new ViewPlatform();
+            tgCamara.addChild(vpPlanta);
+            mov.addChild(tgCamara);
+            view.attachViewPlatform(vpPlanta);
+        }
+        
+        
         
         mov.setPickable(false);
         

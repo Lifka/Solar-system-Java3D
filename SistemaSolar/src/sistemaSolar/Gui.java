@@ -22,6 +22,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.media.j3d.View;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -50,19 +51,21 @@ public class Gui extends JFrame{
             JRadioButton nave = new JRadioButton("Nave");
             JRadioButton luna = new JRadioButton("Luna");
             JRadioButton perspectiva = new JRadioButton("Perspectiva", true);
-            camaras.getView(2).addCanvas3D(canvas);
+            camaras.getView(1).addCanvas3D(canvas);
             
             
             nave.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    camaras.getView(2).addCanvas3D(canvas);
+                    canvas.getView().removeCanvas3D(canvas);
+                    camaras.getView(3).addCanvas3D(canvas);
                 }
             });
             
             luna.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    canvas.getView().removeCanvas3D(canvas);
                     camaras.getView(2).addCanvas3D(canvas);
                 }
             });
@@ -70,7 +73,8 @@ public class Gui extends JFrame{
             perspectiva.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    camaras.getView(2).addCanvas3D(canvas);
+                    canvas.getView().removeCanvas3D(canvas);
+                    camaras.getView(1).addCanvas3D(canvas);
                 }
             });
             
@@ -118,7 +122,8 @@ public class Gui extends JFrame{
         // Crear canvas
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-
+        
+        
              
         // *************** UNIVERSE
         // Crear Simple Universe
@@ -126,10 +131,34 @@ public class Gui extends JFrame{
         // Sale de nuestra propia clase
         universe.createUniverso();
         
+        
+        
+        
+        //****************CAMARAS****************
+        
+       
+       Camaras camaras = new Camaras();
+       
+       universe.addView(camaras.getViewPlanta());// 0
+       universe.addView(camaras.getViewPerspective(canvas2));// 1
+       
+       View viewMoon = camaras.getNewView();// 2
+       View viewNave = camaras.getNewView();// 3
+       
+        
+        
+        //*********************************
+
+        
+        
         // Crear los astros
         universe.crearSistemaSolar();
         HashMap<String,Astro> astros = universe.getAstros();
         ArrayList<Astro> astros_array = universe.getAstrosArray();
+        
+        // Asignar vista a Luna
+        ((Satelite)astros.get("luna")).setView(viewMoon);
+
         
         // Creamos el árbol
         BranchGroup raiz = new BranchGroup();
@@ -182,7 +211,11 @@ public class Gui extends JFrame{
        universe.simpleUniverse.getViewingPlatform().setNominalViewingTransform();
 
        raiz.addChild(background);
+       
+       // *************** NAVE
        Nave nave = new Nave();
+       // Cámara nave:
+       nave.setView(viewNave);
        TransformGroup tg_nave = nave.getNaveBranch();
        tg_nave.setPickable(false);
        raiz.addChild(tg_nave);
@@ -191,25 +224,13 @@ public class Gui extends JFrame{
        ps.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
        raiz.addChild(ps);
        
-       PickForStop ps2 = new PickForStop(canvas2, raiz);
-       ps2.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
-       raiz.addChild(ps2);
-       
-       
-       raiz.compile();
        universe.locale.addBranchGraph(raiz);
-       
-       Camaras camaras = new Camaras();
-       
-       universe.addView(camaras.getViewPlanta());// 0
-       universe.addView(camaras.getViewPerspective(canvas2));// 1
-       
-       universe.addView(camaras.getViewPerspective(canvas2));// 2
-       universe.addView(camaras.getViewPerspective(canvas2));// 3
 
+       
        
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA, camaras);
        Gui windows2 = new Gui(canvas2, "Vistas", VISTAS, camaras);
+      // raiz.compile();
     }
     
 }

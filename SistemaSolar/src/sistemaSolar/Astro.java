@@ -49,6 +49,7 @@ public abstract class Astro extends BranchGroup{
         this.distancia = distancia;
         esfera = new Sphere();
         setCapability(ENABLE_PICK_REPORTING);
+        
     }
     
     public Astro(String nombre, float radio, float distancia,
