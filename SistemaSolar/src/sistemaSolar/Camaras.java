@@ -9,7 +9,9 @@ import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.universe.ViewingPlatform;
 import java.util.ArrayList;
 import javax.media.j3d.BoundingSphere;
+import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Node;
 import javax.media.j3d.PhysicalBody;
 import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.Transform3D;
@@ -112,14 +114,25 @@ public class Camaras {
         
     }
     
-    public TransformGroup getViewMoon(){
+    public View getNewView(){
+        ViewingPlatform vpPersp = new ViewingPlatform();
         
-        return null;
-    }
-    
-    public TransformGroup getViewCamera(){
+        View viewPersp = new View();
+        viewPersp.setPhysicalBody(new PhysicalBody ( ) ) ;
+        viewPersp.setPhysicalEnvironment(new PhysicalEnvironment());
+        viewPersp.setProjectionPolicy(View.PERSPECTIVE_PROJECTION);
+        viewPersp.setFieldOfView(Math.toRadians(45));
+        viewPersp.setFrontClipDistance(0.1);
+        viewPersp.setBackClipDistance(35);
         
-        return null;
+        
+        viewPersp.attachViewPlatform(vpPersp.getViewPlatform());
+        
+        
+        views.add(viewPersp);
+        
+        return viewPersp;
+        
     }
     
     

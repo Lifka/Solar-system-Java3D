@@ -8,11 +8,20 @@ package sistemaSolar;
 
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
+import javax.media.j3d.PhysicalBody;
+import javax.media.j3d.PhysicalEnvironment;
+import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.media.j3d.View;
+import javax.media.j3d.ViewPlatform;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 
 public class Satelite extends Astro {
     private Planeta planeta;
+    private Boolean has_view = false;
+    private View view;
     
     public Satelite(String nombre, float radio, float distancia, 
             String archivo_textura, Material material, 
@@ -32,6 +41,11 @@ public class Satelite extends Astro {
         this.planeta = p;
     }
     
+    public void setView(View vista){
+        has_view = true;
+        view = vista;
+    }
+    
     
     @Override
     public void makeTransform(Canvas3D canvas){
@@ -40,10 +54,30 @@ public class Satelite extends Astro {
         TransformGroup distance = getDistanceTransform();
         setTimerTras((long)traslacion_false);
         TransformGroup traslada = getRotartransform(this.timer_traslacion, 1);
+       
+        
         rota.addChild(esfera);
                 
         distance.addChild(rota);
         traslada.addChild(distance);
+        
+        if(has_view){
+            
+            Transform3D transformLook = new Transform3D ();
+            transformLook.lookAt(new Point3d(-1, 0, 0), new Point3d (0, 0, 0),
+                    new Vector3d(0, 1, 0));
+
+            transformLook.invert();
+
+            TransformGroup tgCamara = new TransformGroup(transformLook);
+        
+        
+            ViewPlatform vpPlanta = new ViewPlatform();
+            tgCamara.addChild(vpPlanta);
+            traslada.addChild(tgCamara);
+            view.attachViewPlatform(vpPlanta);
+        }
+            
         addChild(traslada);
     }
    
