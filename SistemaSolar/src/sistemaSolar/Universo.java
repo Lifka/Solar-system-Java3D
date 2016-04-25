@@ -21,12 +21,15 @@ import javax.media.j3d.Background;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Locale;
 import javax.media.j3d.Material;
-import javax.media.j3d.PointLight;
+import javax.media.j3d.PhysicalBody;
+import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.Texture;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
+import javax.media.j3d.ViewPlatform;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -35,17 +38,19 @@ public class Universo {
     private Nave nave;
     private HashMap<String,Astro> astros;
     private Texture textura;
-    private Canvas3D aCanvas;
     final int TRASLADO_SOL = 200000;
     final int TRASLADO_ORB = 200000;
     final float ESCALE = 0.1f;
+    Locale locale;
+    SimpleUniverse simpleUniverse;
+    private BranchGroup vistas = new BranchGroup();
+    
     
 
-    public Universo (String archivo_text,Canvas3D aCanvas){
+    public Universo (String archivo_text){
 //        this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
         this.astros = new HashMap<String,Astro>();
-        this.aCanvas = aCanvas;
     }
     
     public int getNumComponentes(){
@@ -261,48 +266,93 @@ public class Universo {
     }
 
     
-    
-    
-    public SimpleUniverse createUniverso(){
-
-        /***********    VIEWINGPLATFORM   **********/
+    /*
+      /***********    VIEWINGPLATFORM   **********/
         
         // Creamos lo que hace que se vean las cosas, manualmente, para poder asignarlo
         // y personalizarlo
-       ViewingPlatform viewingPlatform = new ViewingPlatform();
+       // ViewingPlatform viewingPlatform = new ViewingPlatform();
         // Radio de activación
-        viewingPlatform.getViewPlatform().setActivationRadius(100f);
-        
+      /*  viewingPlatform.getViewPlatform().setActivationRadius(100f);
+        */
         // Transformación de vista -> dónde se está , a dónde se mira , Vup
-        TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
+      /*  TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
         Transform3D viewTransform3D = new Transform3D ( );
-        viewTransform3D.lookAt (new Point3d (20 ,20 ,20 ),
-                new Point3d (0, 0, 0), new Vector3d (0 ,1 ,0));
+        viewTransform3D.lookAt (new Point3d (0 ,10 ,0 ),
+                new Point3d (0, 0, 0), new Vector3d (0 ,0 ,-1));
         
         viewTransform3D.invert();
         viewTransformGroup.setTransform(viewTransform3D);
-        
-        // Mover la cámara con el ratón
-        OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
+        */
+        // Mover la cámara con el ratón*************
+       /* OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
         orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
         
         orbit.setZoomFactor(5.0f);
         
-        viewingPlatform.setViewPlatformBehavior(orbit);
+        viewingPlatform.setViewPlatformBehavior(orbit);*/
+        //*******************************************
     
         
         /**************   VIEWER     **************/
-        
+     /*   
         Viewer viewer = new Viewer(aCanvas);
         View view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
+       */
+        
+    //    return (new SimpleUniverse(viewingPlatform,viewer));
+
+    
+    public void createUniverso(){
+        simpleUniverse = new SimpleUniverse();
+        locale = new Locale(simpleUniverse);
         
         
+        vistas.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
+        vistas.setCapability(BranchGroup.ALLOW_DETACH);
         
-        return (new SimpleUniverse(viewingPlatform,viewer));
+        locale.addBranchGraph(vistas);
 
     }
+    
+    public void setViewPlanta(Canvas3D aCanvas){
+        // TransformGroup para posicionar y orientar la vista
+        Transform3D transformPlanta = new Transform3D ();
+        transformPlanta.lookAt(new Point3d(0, 10, 0), new Point3d (0, 0, 0),
+                new Vector3d(0, 0, -1));
+        
+        transformPlanta.invert();
+        
+        TransformGroup tgPlanta = new TransformGroup(transformPlanta);
+        ViewPlatform vpPlanta = new ViewPlatform();
+        
+        tgPlanta.addChild(vpPlanta);
+        
+        // Definición de la vista paralela
+        
+        View viewPlanta = new View();
+        viewPlanta.setPhysicalBody(new PhysicalBody());
+        viewPlanta.setPhysicalEnvironment(new PhysicalEnvironment());
+        viewPlanta.setProjectionPolicy(View .PARALLEL_PROJECTION);
+        viewPlanta.setScreenScalePolicy(View.SCALE_EXPLICIT);
+        viewPlanta.setScreenScale(0.01);
+        viewPlanta.setFrontClipDistance(0.1);
+        viewPlanta.setBackClipDistance(20);
+        
+        viewPlanta.addCanvas3D(aCanvas);
+        viewPlanta.attachViewPlatform(vpPlanta);
+        
+        
+        tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+	tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
+        locale.removeBranchGraph(vistas);
+        vistas.addChild(tgPlanta);
+        locale.addBranchGraph(vistas);
+    }
+    
     
     
     public BranchGroup createBackground(){
@@ -332,6 +382,5 @@ public class Universo {
         
         return backgroundBranch;
     }
-
 
 }

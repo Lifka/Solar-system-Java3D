@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+    Gallardo Morales, Juan Carlos - jcgallardomorales@gmail.com
+    Izquierdo Vera, Javier - javieriizquierdovera@gmail.com
+
  */
 package sistemaSolar;
 
@@ -11,10 +12,6 @@ import javax.media.j3d.PointLight;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 
-/**
- *
- * @author jgallardo
- */
 public class LuzPuntual extends BranchGroup{
     public LuzPuntual(Color3f c){
         PointLight luz_puntual = new PointLight();

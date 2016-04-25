@@ -6,6 +6,7 @@
  */
 package sistemaSolar;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
@@ -64,4 +65,5 @@ public class Estrella extends Astro{
         
         addChild(rota);
     }
+    
 }
