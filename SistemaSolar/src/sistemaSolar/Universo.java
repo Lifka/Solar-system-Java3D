@@ -309,6 +309,10 @@ public class Universo {
         simpleUniverse = new SimpleUniverse();
         locale = new Locale(simpleUniverse);
         
+        
+        vistas.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
+        vistas.setCapability(BranchGroup.ALLOW_DETACH);
+        
         locale.addBranchGraph(vistas);
 
     }
@@ -340,7 +344,13 @@ public class Universo {
         viewPlanta.addCanvas3D(aCanvas);
         viewPlanta.attachViewPlatform(vpPlanta);
         
+        
+        tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+	tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
+        locale.removeBranchGraph(vistas);
         vistas.addChild(tgPlanta);
+        locale.addBranchGraph(vistas);
     }
     
     
