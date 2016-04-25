@@ -128,6 +128,14 @@ public abstract class Astro extends BranchGroup{
     
     
     public abstract void makeTransform(Canvas3D canvas);
+    
+    public void setBehaviour(Canvas3D canvas){
+        PickForStop ps = new PickForStop(canvas);
+        ps.stopTransform(this);
+        BoundingSphere bounds_sphere = new BoundingSphere (new Point3d (0.0, 0.0, 0.0), radio_false/4.0);
+        ps.setSchedulingBounds(bounds_sphere);
+        addChild(ps);
+    }
 
     
     public TransformGroup getRotartransform(float vel_rotar, int direccion){

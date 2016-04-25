@@ -111,12 +111,7 @@ public class Planeta extends Astro{
         TransformGroup traslada = getRotartransform(traslacion_false, 1);
         putOrbit();
         
-        PickForStop ps = new PickForStop(canvas);
-        ps.stopTransform(this);
-        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), radio_false/4);
-        ps.setSchedulingBounds(bounds);
         rota.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
-        rota.addChild(ps);
         
         rota.addChild(esfera);
         

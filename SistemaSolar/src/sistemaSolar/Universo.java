@@ -308,7 +308,7 @@ public class Universo {
     public BranchGroup createBackground(){
         
         Background background = new Background();
-        BoundingSphere bound = new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100000.0);
+        BoundingSphere bound = new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100.0);
         background.setApplicationBounds(bound);
         
         Appearance apariencia = new Appearance();

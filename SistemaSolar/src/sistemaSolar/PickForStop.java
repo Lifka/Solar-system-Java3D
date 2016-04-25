@@ -38,11 +38,10 @@ public class PickForStop extends Behavior{
         pickCanvas.setTolerance(2.0f);
         pickCanvas.setMode(PickInfo.PICK_GEOMETRY);
         pickCanvas.setFlags(PickInfo.NODE | PickInfo.CLOSEST_GEOM_INFO);
-    }
-    
+    } 
 
     @Override
-    public void initialize() {
+    public void initialize(){
         setEnable(true);
         wakeupOn(condicion);
     }
@@ -59,14 +58,17 @@ public class PickForStop extends Behavior{
         
         if (pi != null){
             Node nodo_traslada = pi.getNode().getParent().getParent();
-            Alpha timer = (Alpha)nodo_traslada.getUserData();
-            boolean parado = timer.isPaused();
-            if (parado)
-                timer.resume();
-            else
-                timer.pause();
+            Alpha timer = (Alpha) nodo_traslada.getUserData();
+            
+            if (timer != null){
+                boolean parado = timer.isPaused();
+
+                if (parado)
+                    timer.resume();
+                else
+                    timer.pause();
+            }
         }
         wakeupOn(condicion);
     }
-    
 }

@@ -19,6 +19,7 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.swing.WindowConstants;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 
 public class Prueba {
 
@@ -62,6 +63,7 @@ public class Prueba {
         // *************** SOL
         Astro sol = astros.get("sol");
         sol.makeTransform(canvas);
+        sol.setBehaviour(canvas);
 
         // Transformaciones del objeto (van en un transform group)
         Transform3D t3d = new Transform3D();
@@ -89,6 +91,7 @@ public class Prueba {
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
                 // TRANSFORMS
+                astro.setBehaviour(canvas);
                 astro.makeTransform(canvas);
                 
                 // AÑADIR ASTRO A LA RAIZ
@@ -97,7 +100,6 @@ public class Prueba {
         }
         
         ((Planeta)astros.get("tierra")).cloudEnabled(true, "src/texturas_planetas/cloud.png");
-        
         
         simpleUniverse.getViewingPlatform().setNominalViewingTransform();
         
