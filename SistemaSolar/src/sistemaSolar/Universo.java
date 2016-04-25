@@ -252,55 +252,12 @@ public class Universo {
         astros.put(urano.getNombre(), urano);
         astros.put(neptuno.getNombre(), neptuno);
     }
-
-    
-    /*
-      /***********    VIEWINGPLATFORM   **********/
-        
-        // Creamos lo que hace que se vean las cosas, manualmente, para poder asignarlo
-        // y personalizarlo
-       // ViewingPlatform viewingPlatform = new ViewingPlatform();
-        // Radio de activación
-      /*  viewingPlatform.getViewPlatform().setActivationRadius(100f);
-        */
-        // Transformación de vista -> dónde se está , a dónde se mira , Vup
-      /*  TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
-        Transform3D viewTransform3D = new Transform3D ( );
-        viewTransform3D.lookAt (new Point3d (0 ,10 ,0 ),
-                new Point3d (0, 0, 0), new Vector3d (0 ,0 ,-1));
-        
-        viewTransform3D.invert();
-        viewTransformGroup.setTransform(viewTransform3D);
-        */
-        // Mover la cámara con el ratón*************
-       /* OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
-        orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
-        
-        orbit.setZoomFactor(5.0f);
-        
-        viewingPlatform.setViewPlatformBehavior(orbit);*/
-        //*******************************************
-    
-        
-        /**************   VIEWER     **************/
-     /*   
-        Viewer viewer = new Viewer(aCanvas);
-        View view = viewer.getView();
-        view.setFieldOfView(Math.toRadians(45));
-        view.setBackClipDistance(50.0);
-       */
-        
-    //    return (new SimpleUniverse(viewingPlatform,viewer));
-
     
     public void createUniverso(){
         simpleUniverse = new SimpleUniverse();
         locale = new Locale(simpleUniverse);
-        
-        
         vistas.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
         vistas.setCapability(BranchGroup.ALLOW_DETACH);
-        
         locale.addBranchGraph(vistas);
 
     }
@@ -310,13 +267,6 @@ public class Universo {
         vistas.addChild(node_view);
         locale.addBranchGraph(vistas);
     }
- /*
-    public void addPlatform(ViewingPlatform platform){
-        locale.removeBranchGraph(vistas);
-        vistas.addChild(platform);
-        locale.addBranchGraph(vistas);
-    }
-    */
     
     public BranchGroup createBackground(){
         

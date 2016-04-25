@@ -224,6 +224,10 @@ public class Gui extends JFrame{
        ps.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
        raiz.addChild(ps);
        
+       PickForStop ps2 = new PickForStop(canvas2,raiz);
+       ps2.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
+       raiz.addChild(ps2);
+       
        universe.locale.addBranchGraph(raiz);
 
        
