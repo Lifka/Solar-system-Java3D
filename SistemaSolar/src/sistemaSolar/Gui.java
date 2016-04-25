@@ -140,7 +140,7 @@ public class Gui extends JFrame{
         
         // *************** SOL
         Astro sol = astros.get("sol");
-        sol.makeTransform(canvas);
+        sol.makeTransform();
 
         // Transformaciones del objeto (van en un transform group)
         Transform3D t3d = new Transform3D();
@@ -154,6 +154,7 @@ public class Gui extends JFrame{
         // Añadimos la luz puntual al sol
         LuzPuntual lp = new LuzPuntual(new Color3f(Color.WHITE));
         lp.setPickable(false);
+        
         grupoArotar.addChild(lp);
         
         // Añadimos en el mismo nodo el objeto y el comportamiento
@@ -168,7 +169,7 @@ public class Gui extends JFrame{
             Astro astro = astros_array.get(i);
             if (astro instanceof Planeta){
                 // TRANSFORMS
-                astro.makeTransform(canvas);
+                astro.makeTransform();
                 
                 // AÑADIR ASTRO A LA RAIZ
                 raiz.addChild(astro);
@@ -182,9 +183,9 @@ public class Gui extends JFrame{
 
        raiz.addChild(background);
        Nave nave = new Nave();
-       TransformGroup b_nave = nave.getNaveBranch();
-       b_nave.setPickable(false);
-       raiz.addChild(b_nave);
+       TransformGroup tg_nave = nave.getNaveBranch();
+       tg_nave.setPickable(false);
+       raiz.addChild(tg_nave);
        
        PickForStop ps = new PickForStop(canvas,raiz);
        ps.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));

@@ -101,7 +101,7 @@ public class Planeta extends Astro{
     
     
     @Override
-    public void makeTransform(Canvas3D canvas){
+    public void makeTransform(){
         TransformGroup inclinacion = getInclinationTransform();
         setTimerRot((long)rotacion_false);
         TransformGroup rota = getRotartransform(this.timer_rotacion, 1);
@@ -118,7 +118,7 @@ public class Planeta extends Astro{
         }
         
         for (Satelite value : satelites.values()) {
-            value.makeTransform(canvas);
+            value.makeTransform();
             rota.addChild(value);
         }
                 

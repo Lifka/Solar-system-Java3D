@@ -10,7 +10,6 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Appearance;
@@ -27,7 +26,6 @@ import javax.vecmath.Point3d;
 public class Universo {
     private Nave nave;
     private HashMap<String,Astro> astros;
-    private Texture textura;
     final int TRASLADO_SOL = 200000;
     final int TRASLADO_ORB = 200000;
     final float ESCALE = 0.1f;
@@ -38,7 +36,6 @@ public class Universo {
     
 
     public Universo (String archivo_text){
-//        this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
         this.astros = new HashMap();
     }

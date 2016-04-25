@@ -88,8 +88,6 @@ public class Camaras {
         tgPersp.addChild(vpPersp);
         
         
-        
-        
         View viewPersp = new View();
         viewPersp.setPhysicalBody(new PhysicalBody ( ) ) ;
         viewPersp.setPhysicalEnvironment(new PhysicalEnvironment());

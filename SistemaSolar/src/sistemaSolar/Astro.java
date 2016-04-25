@@ -130,7 +130,7 @@ public abstract class Astro extends BranchGroup{
         return (t_traslacion > 0);
     }
     
-    public abstract void makeTransform(Canvas3D canvas);
+    public abstract void makeTransform();
 
     
     public TransformGroup getRotartransform(Alpha timer, int direccion){

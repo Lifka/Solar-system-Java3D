@@ -34,7 +34,7 @@ public class Satelite extends Astro {
     
     
     @Override
-    public void makeTransform(Canvas3D canvas){
+    public void makeTransform(){
         setTimerRot((long)rotacion_false);
         TransformGroup rota = getRotartransform(this.timer_rotacion, 1);
         TransformGroup distance = getDistanceTransform();
