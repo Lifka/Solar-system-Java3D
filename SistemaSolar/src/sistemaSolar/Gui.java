@@ -40,8 +40,8 @@ public class Gui extends JFrame{
          
          
         if (mode == PLANTA){
-            main_panel.add("North", new Label("Vista planta fija:"));
-            main_panel.add("Center", canvas);
+            main_panel.add(BorderLayout.NORTH, new Label("Vista planta fija:"));
+            main_panel.add(BorderLayout.CENTER, canvas);
         } else if(mode == VISTAS){
             JRadioButton nave = new JRadioButton("Nave");
             JRadioButton luna = new JRadioButton("Luna");
@@ -72,7 +72,7 @@ public class Gui extends JFrame{
             
             main_panel.add(BorderLayout.NORTH, botones_panel);
             
-            main_panel.add("Center", canvas);
+            main_panel.add(BorderLayout.CENTER, canvas);
         }
          
         add(main_panel);
@@ -152,8 +152,20 @@ public class Gui extends JFrame{
        raiz.addChild(new Nave().getNaveBranch());
        raiz.compile();
        universe.locale.addBranchGraph(raiz);
-    
+    /*
        universe.setViewPlanta(canvas);
+       universe.setViewPerspectiva(canvas2, true);
+       */
+       
+       Camaras camaras = new Camaras();
+       
+       
+       universe.addView(camaras.getViewPlanta());
+       universe.addView(camaras.getViewPerspective());
+       
+       camaras.getView(0).addCanvas3D(canvas);
+       camaras.getView(1).addCanvas3D(canvas2);
+       
        
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA);
        Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);
