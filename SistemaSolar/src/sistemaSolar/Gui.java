@@ -13,6 +13,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.BoundingSphere;
@@ -20,6 +22,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.media.j3d.View;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,7 +35,7 @@ public class Gui extends JFrame{
     private static final int PLANTA = 0;
     private static final int VISTAS = 1;
     
-    Gui(Canvas3D canvas, String title, int mode){
+    Gui(Canvas3D canvas, String title, int mode, Camaras camaras){
         
         setTitle(title);
         setLayout(new BorderLayout());
@@ -41,12 +44,39 @@ public class Gui extends JFrame{
          
          
         if (mode == PLANTA){
-            main_panel.add("North", new Label("Vista planta fija:"));
-            main_panel.add("Center", canvas);
+            camaras.getView(0).addCanvas3D(canvas);
+            main_panel.add(BorderLayout.NORTH, new Label("Vista planta fija:"));
+            main_panel.add(BorderLayout.CENTER, canvas);
         } else if(mode == VISTAS){
             JRadioButton nave = new JRadioButton("Nave");
             JRadioButton luna = new JRadioButton("Luna");
             JRadioButton perspectiva = new JRadioButton("Perspectiva", true);
+            camaras.getView(1).addCanvas3D(canvas);
+            
+            
+            nave.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    camaras.getView(3).addCanvas3D(canvas);
+                }
+            });
+            
+            luna.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    camaras.getView(2).addCanvas3D(canvas);
+                }
+            });
+            
+            perspectiva.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    camaras.getView(1).addCanvas3D(canvas);
+                }
+            });
+            
+            
+            
             ButtonGroup botones = new ButtonGroup();
             botones.add(nave);
             botones.add(luna);
@@ -73,7 +103,7 @@ public class Gui extends JFrame{
             
             main_panel.add(BorderLayout.NORTH, botones_panel);
             
-            main_panel.add("Center", canvas);
+            main_panel.add(BorderLayout.CENTER, canvas);
         }
          
         add(main_panel);
@@ -81,7 +111,7 @@ public class Gui extends JFrame{
         setVisible(true);
          
     }
-
+    
     
     public static void main(String[] args) {
         
@@ -159,11 +189,14 @@ public class Gui extends JFrame{
        
        raiz.compile();
        universe.locale.addBranchGraph(raiz);
-    
-       universe.setViewPlanta(canvas);
        
-       Gui windows1 = new Gui(canvas, "Planta fija", PLANTA);
-       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);
+       Camaras camaras = new Camaras();
+       
+       universe.addView(camaras.getViewPlanta());
+       universe.addView(camaras.getViewPerspective());
+       
+       Gui windows1 = new Gui(canvas, "Planta fija", PLANTA, camaras);
+       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS, camaras);
     }
     
 }

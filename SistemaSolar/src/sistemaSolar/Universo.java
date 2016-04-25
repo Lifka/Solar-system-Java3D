@@ -316,43 +316,12 @@ public class Universo {
         locale.addBranchGraph(vistas);
 
     }
-    
-    public void setViewPlanta(Canvas3D aCanvas){
-        // TransformGroup para posicionar y orientar la vista
-        Transform3D transformPlanta = new Transform3D ();
-        transformPlanta.lookAt(new Point3d(0, 15, 0), new Point3d (0, 0, 0),
-                new Vector3d(0, 0, -1));
-        
-        transformPlanta.invert();
-        
-        TransformGroup tgPlanta = new TransformGroup(transformPlanta);
-        ViewPlatform vpPlanta = new ViewPlatform();
-        
-        tgPlanta.addChild(vpPlanta);
-        
-        // Definición de la vista paralela
-        
-        View viewPlanta = new View();
-        viewPlanta.setPhysicalBody(new PhysicalBody());
-        viewPlanta.setPhysicalEnvironment(new PhysicalEnvironment());
-        viewPlanta.setProjectionPolicy(View .PARALLEL_PROJECTION);
-        viewPlanta.setScreenScalePolicy(View.SCALE_EXPLICIT);
-        viewPlanta.setScreenScale(0.01);
-        viewPlanta.setFrontClipDistance(0.1);
-        viewPlanta.setBackClipDistance(20);
-        
-        viewPlanta.addCanvas3D(aCanvas);
-        viewPlanta.attachViewPlatform(vpPlanta);
-        
-        
-        tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-	tgPlanta.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        
+ 
+    public void addView(TransformGroup node_view){
         locale.removeBranchGraph(vistas);
-        vistas.addChild(tgPlanta);
+        vistas.addChild(node_view);
         locale.addBranchGraph(vistas);
     }
-    
     
     
     public BranchGroup createBackground(){
