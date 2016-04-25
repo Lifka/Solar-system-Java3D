@@ -10,12 +10,15 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import com.sun.j3d.utils.universe.Viewer;
+import com.sun.j3d.utils.universe.ViewingPlatform;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.Background;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Locale;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
@@ -35,7 +38,7 @@ public class Universo {
     
     
 
-    public Universo (String archivo_text){
+    public Universo (){
         this.nave = null;
         this.astros = new HashMap();
     }
@@ -254,7 +257,10 @@ public class Universo {
     }
     
     public void createUniverso(){
-        simpleUniverse = new SimpleUniverse();
+        simpleUniverse = new SimpleUniverse(null);
+        simpleUniverse.getViewer().setVisible(false);
+        simpleUniverse.removeAllLocales();
+        
         locale = new Locale(simpleUniverse);
         vistas.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
         vistas.setCapability(BranchGroup.ALLOW_DETACH);

@@ -28,10 +28,10 @@ public class sistemaSolarMain {
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         
-             
+          
         // *************** UNIVERSE
         // Crear Simple Universe
-        Universo universe = new Universo(new String());
+        Universo universe = new Universo();
         // Sale de nuestra propia clase
         universe.createUniverso();
         
