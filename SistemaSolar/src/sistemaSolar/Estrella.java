@@ -51,7 +51,6 @@ public class Estrella extends Astro{
     }
     
     
-    
     @Override
     public void makeTransform(Canvas3D canvas){
         setTimerRot((long)rotacion_false);
