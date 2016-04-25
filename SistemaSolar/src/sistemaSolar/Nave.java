@@ -75,12 +75,7 @@ public class Nave {
         if(has_view){
             
             Transform3D transformLook = new Transform3D ();
-            /*
             
-            transformLook.lookAt(new Point3d(-1, 0, 0), new Point3d (0, 0, -1),
-                    new Vector3d(0, 1, 0));
-            
-            */
             transformLook.lookAt(new Point3d(0, 0, 0), new Point3d (0, 0, -1),
                     new Vector3d(0, 1, 0));
 
