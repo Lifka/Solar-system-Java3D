@@ -15,13 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
 import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Point3d;
 import javax.media.j3d.TransparencyAttributes;
 
 

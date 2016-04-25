@@ -8,9 +8,7 @@ package sistemaSolar;
 
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Primitive;
-import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
-import java.awt.Color;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Material;
@@ -28,7 +26,6 @@ public class Anillo extends BranchGroup{
     
     protected Texture textura;
     protected Material material;
-    protected Color color;
     
     protected double t_rotacion;
     
@@ -37,15 +34,14 @@ public class Anillo extends BranchGroup{
         this.radio = astro.getRadio()*1.5;
         cilindro = new Cylinder();
     }
-    public Anillo(String nombre, double radio, String archivo_textura, Material material, Color color){
-        
+    public Anillo(String nombre, double radio, String archivo_textura, Material material){
         this.nombre = nombre;
         this.radio = radio;
         
-        setApariencia(archivo_textura, material, color);
+        setApariencia(archivo_textura, material);
     }
     
-    public void setApariencia(String archivo_textura, Material material, Color color){
+    public void setApariencia(String archivo_textura, Material material){
         this.material = material;
         apariencia = new Appearance();
         

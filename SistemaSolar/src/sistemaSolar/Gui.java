@@ -22,7 +22,6 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -165,6 +164,7 @@ public class Gui extends JFrame{
         
         // Fondo
         BranchGroup background = universe.createBackground();
+        background.setPickable(false);
         
         // *************** SOL
         Astro sol = astros.get("sol");
@@ -181,9 +181,11 @@ public class Gui extends JFrame{
         
         // Añadimos la luz puntual al sol
         LuzPuntual lp = new LuzPuntual(new Color3f(Color.WHITE));
+        lp.setPickable(false);
         grupoArotar.addChild(lp);
         
         // Añadimos en el mismo nodo el objeto y el comportamiento
+        grupoArotar.setPickable(false);
         grupoArotar.addChild(sol);
         
         // Lo añadimos a la raiz
