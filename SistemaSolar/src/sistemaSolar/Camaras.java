@@ -28,6 +28,7 @@ public class Camaras {
     ArrayList<View> views = new ArrayList();
     
     public Camaras(){
+        
     }
     
     public View getView(int i){
@@ -69,14 +70,24 @@ public class Camaras {
         return tgPlanta;
     }
     
-    public TransformGroup getViewPerspective(){
+    public TransformGroup getViewPerspective(Canvas3D aCanvas){
         Transform3D transformPersp = new Transform3D ( ) ;
         transformPersp.lookAt(new Point3d(10, 10, 10), new Point3d (0, 0, 0),
         new Vector3d (0, 1, 0)) ;
         transformPersp.invert();
         TransformGroup tgPersp = new TransformGroup(transformPersp);
-        ViewPlatform vpPersp = new ViewPlatform();
+        ViewingPlatform vpPersp = new ViewingPlatform();
+        //**********************************
+        vpPersp.getViewPlatform().setActivationRadius(100f);
+        OrbitBehavior orbit = new OrbitBehavior (aCanvas, OrbitBehavior.REVERSE_ALL);
+        orbit.setSchedulingBounds(new BoundingSphere (new Point3d (0.0f, 0.0f , 0.0f) , 100.0f));
+        orbit.setZoomFactor(5.0f);
+        vpPersp.setViewPlatformBehavior(orbit);
+        //**********************************
+        
         tgPersp.addChild(vpPersp);
+        
+        
         
         
         View viewPersp = new View();
@@ -87,18 +98,19 @@ public class Camaras {
         viewPersp.setFrontClipDistance(0.1);
         viewPersp.setBackClipDistance(35);
         
-        viewPersp.attachViewPlatform(vpPersp);
+        
+        viewPersp.attachViewPlatform(vpPersp.getViewPlatform());
         
         
         tgPersp.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tgPersp.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-      
+        
         
         views.add(viewPersp);
         
         return tgPersp;
+        
     }
-    
     
     public TransformGroup getViewMoon(){
         
@@ -109,5 +121,6 @@ public class Camaras {
         
         return null;
     }
+    
     
 }
