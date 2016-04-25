@@ -63,6 +63,8 @@ public class Estrella extends Astro{
         
         rota.addChild(esfera);
         
+        // sa
+        
         addChild(rota);
     }
     
