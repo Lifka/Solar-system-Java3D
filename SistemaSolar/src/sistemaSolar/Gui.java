@@ -7,10 +7,8 @@
 package sistemaSolar;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -97,15 +95,12 @@ public class Gui extends JFrame{
         // Crear Simple Universe
         Universo universe = new Universo(new String(), canvas);
         // Sale de nuestra propia clase
-        SimpleUniverse simpleUniverse = universe.createUniverso();
+        universe.createUniverso();
         
         // Crear los astros
         universe.crearSistemaSolar();
         HashMap<String,Astro> astros = universe.getAstros();
         ArrayList<Astro> astros_array = universe.getAstrosArray();
-        
-        // Hacemos visible la ventana
-       // visualizationWindows.setVisible(true);
         
         // Creamos el árbol
         BranchGroup raiz = new BranchGroup();
@@ -125,8 +120,6 @@ public class Gui extends JFrame{
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         grupoArotar.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
-        
-        BoundingSphere bounds = new BoundingSphere();
         
         // Añadimos la luz puntual al sol
         LuzPuntual lp = new LuzPuntual(new Color3f(Color.WHITE));
@@ -153,15 +146,14 @@ public class Gui extends JFrame{
         ((Planeta)astros.get("tierra")).cloudEnabled(true, "src/texturas_planetas/cloud.png");
         
         
-        simpleUniverse.getViewingPlatform().setNominalViewingTransform();
 
        raiz.addChild(background);
        raiz.addChild(new Nave().getNaveBranch());
        raiz.compile();
-       simpleUniverse.addBranchGraph(raiz);
-       
+       universe.locale.addBranchGraph(raiz);
+     /*  
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA);
-       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);
+       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);*/
     }
     
 }
