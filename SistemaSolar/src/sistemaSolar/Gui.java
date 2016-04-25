@@ -182,17 +182,11 @@ public class Gui extends JFrame{
        raiz.addChild(new Nave().getNaveBranch());
        raiz.compile();
        universe.locale.addBranchGraph(raiz);
-    /*
-       universe.setViewPlanta(canvas);
-       universe.setViewPerspectiva(canvas2, true);
-       */
        
        Camaras camaras = new Camaras();
        
-       
        universe.addView(camaras.getViewPlanta());
        universe.addView(camaras.getViewPerspective());
-       
        
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA, camaras);
        Gui windows2 = new Gui(canvas2, "Vistas", VISTAS, camaras);
