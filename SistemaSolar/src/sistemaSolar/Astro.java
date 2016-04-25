@@ -9,9 +9,6 @@ package sistemaSolar;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.image.TextureLoader;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
@@ -44,12 +41,14 @@ public abstract class Astro extends BranchGroup{
     protected Material material;
     
     protected double t_rotacion, t_traslacion, ang_traslacion;
+    protected Alpha timer_rotacion, timer_traslacion;
     
     public Astro(String nombre, float radio, float distancia){
         this.nombre = nombre;
         this.radio = radio;
         this.distancia = distancia;
         esfera = new Sphere();
+        setCapability(ENABLE_PICK_REPORTING);
     }
     
     public Astro(String nombre, float radio, float distancia,
@@ -68,6 +67,7 @@ public abstract class Astro extends BranchGroup{
         
         setApariencia(archivo_textura, material);
         setMovimiento(rotacion, traslacion);
+        setCapability(ENABLE_PICK_REPORTING);
     }
     
   
@@ -92,14 +92,19 @@ public abstract class Astro extends BranchGroup{
         
         apariencia.setMaterial(this.material);
         
-        
-        //this.color = color;
         esfera = new Sphere(radio_false/4, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, apariencia);
     }
     
     public void setMovimiento(double rotacion, double traslacion){
         this.t_rotacion = rotacion;
         this.t_traslacion = traslacion;
+    }
+    
+    public void setTimerRot(long vel_rotar){
+        this.timer_rotacion = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_rotar, 0, 0 ,0, 0, 0);
+    }
+    public void setTimerTras(long vel_tras){
+        this.timer_traslacion = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_tras, 0, 0 ,0, 0, 0);
     }
     
     public String getNombre(){
@@ -125,31 +130,19 @@ public abstract class Astro extends BranchGroup{
         return (t_traslacion > 0);
     }
     
-    
-    
     public abstract void makeTransform(Canvas3D canvas);
-    
-    public void setBehaviour(Canvas3D canvas){
-        PickForStop ps = new PickForStop(canvas);
-        ps.stopTransform(this);
-        BoundingSphere bounds_sphere = new BoundingSphere (new Point3d (0.0, 0.0, 0.0), radio_false/4.0);
-        ps.setSchedulingBounds(bounds_sphere);
-        addChild(ps);
-    }
 
     
-    public TransformGroup getRotartransform(float vel_rotar, int direccion){
+    public TransformGroup getRotartransform(Alpha timer, int direccion){
         Transform3D yAxis = new Transform3D();
         TransformGroup tg = new TransformGroup(yAxis);
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 	tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        Alpha timer = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)vel_rotar, 0, 0 ,0, 0, 0);
         RotationInterpolator  rot_interpolator = new RotationInterpolator(timer, tg, yAxis, 0.0f, direccion*(float) Math.PI*2.0f);
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0,0.0,0.0), radio_false/4);
         rot_interpolator.setSchedulingBounds(bounds);
         
         // añadimos al TransformGroup la animación y la figura
-        tg.setUserData(timer);
         tg.addChild(rot_interpolator);
         
         return(tg);
@@ -162,6 +155,13 @@ public abstract class Astro extends BranchGroup{
         TransformGroup tg = createTransformGroup(new TransformGroup(), transform);
         
         return(tg);
+    }
+    
+    public Alpha getTimerRotacion(){
+        return this.timer_rotacion;
+    }
+    public Alpha getTimerTraslacion(){
+        return this.timer_traslacion;
     }
     
     public TransformGroup getInclinationTransform(){

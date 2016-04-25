@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 
 public class Gui extends JFrame{
     private static final int PLANTA = 0;
@@ -150,6 +151,12 @@ public class Gui extends JFrame{
 
        raiz.addChild(background);
        raiz.addChild(new Nave().getNaveBranch());
+       
+       PickForStop ps = new PickForStop(canvas,raiz);
+       ps.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 100));
+       raiz.addChild(ps);
+       
+       
        raiz.compile();
        universe.locale.addBranchGraph(raiz);
     

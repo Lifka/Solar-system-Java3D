@@ -320,7 +320,7 @@ public class Universo {
     public void setViewPlanta(Canvas3D aCanvas){
         // TransformGroup para posicionar y orientar la vista
         Transform3D transformPlanta = new Transform3D ();
-        transformPlanta.lookAt(new Point3d(0, 10, 0), new Point3d (0, 0, 0),
+        transformPlanta.lookAt(new Point3d(0, 15, 0), new Point3d (0, 0, 0),
                 new Vector3d(0, 0, -1));
         
         transformPlanta.invert();

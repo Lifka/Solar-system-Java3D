@@ -60,6 +60,8 @@ public class Nave {
         inclinacion.addChild(modelo.getSceneGroup());
         mov.addChild(inclinacion);
         
+        mov.setPickable(false);
+        
         return mov;
    }
 

@@ -38,6 +38,10 @@ public class OrbitCircle extends BranchGroup{
         this.nombre = nombre;
         this.radio = astro.getDistancia();
         cilindro = new Cylinder();
+        cilindro.getShape(0).setPickable(false);
+        cilindro.getShape(1).setPickable(false);
+        cilindro.getShape(2).setPickable(false);
+        this.setPickable(false);
     }
     
     public OrbitCircle(String nombre, double radio, Material material, Color color){

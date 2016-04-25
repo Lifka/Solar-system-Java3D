@@ -35,9 +35,11 @@ public class Satelite extends Astro {
     
     @Override
     public void makeTransform(Canvas3D canvas){
-        TransformGroup rota = getRotartransform(rotacion_false, 1);
+        setTimerRot((long)rotacion_false);
+        TransformGroup rota = getRotartransform(this.timer_rotacion, 1);
         TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false, 1);
+        setTimerTras((long)traslacion_false);
+        TransformGroup traslada = getRotartransform(this.timer_traslacion, 1);
         rota.addChild(esfera);
                 
         distance.addChild(rota);

@@ -13,6 +13,7 @@ import com.sun.j3d.utils.image.TextureLoader;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
@@ -104,12 +105,13 @@ public class Planeta extends Astro{
     @Override
     public void makeTransform(Canvas3D canvas){
         TransformGroup inclinacion = getInclinationTransform();
-        TransformGroup rota = getRotartransform(rotacion_false, 1);
+        setTimerRot((long)rotacion_false);
+        TransformGroup rota = getRotartransform(this.timer_rotacion, 1);
         TransformGroup distance = getDistanceTransform();
-        TransformGroup traslada = getRotartransform(traslacion_false, 1);
+        setTimerTras((long)traslacion_false);
+        TransformGroup traslada = getRotartransform(this.timer_traslacion, 1);
         putOrbit();
         
-        rota.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
         
         rota.addChild(esfera);
         
@@ -131,6 +133,7 @@ public class Planeta extends Astro{
     
     public void putOrbit(){
         OrbitCircle orbita = new OrbitCircle(nombre, getDistancia(), material, Color.white);
+        orbita.setPickable(false);
         addChild(orbita);
     }
     
@@ -154,7 +157,8 @@ public class Planeta extends Astro{
         
         Sphere cloud_sphere = new Sphere((float)((radio_false/4)*1.05), Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS, 50, appear);
         
-        TransformGroup rota = getRotartransform(10000, -1);
+        Alpha tim = new Alpha(-1,Alpha.INCREASING_ENABLE, 0, 0, (long)10000, 0, 0 ,0, 0, 0);
+        TransformGroup rota = getRotartransform(tim, -1);
             
         if (enable){
             rota.addChild(cloud_sphere);
