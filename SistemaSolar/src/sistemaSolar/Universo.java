@@ -38,19 +38,19 @@ public class Universo {
     private Nave nave;
     private HashMap<String,Astro> astros;
     private Texture textura;
-    private Canvas3D aCanvas;
     final int TRASLADO_SOL = 200000;
     final int TRASLADO_ORB = 200000;
     final float ESCALE = 0.1f;
     Locale locale;
+    SimpleUniverse simpleUniverse;
+    private BranchGroup vistas = new BranchGroup();
     
     
 
-    public Universo (String archivo_text,Canvas3D aCanvas){
+    public Universo (String archivo_text){
 //        this.textura = new TextureLoader(archivo_text, null).getTexture();
         this.nave = null;
         this.astros = new HashMap<String,Astro>();
-        this.aCanvas = aCanvas;
     }
     
     public int getNumComponentes(){
@@ -306,16 +306,14 @@ public class Universo {
 
     
     public void createUniverso(){
-        SimpleUniverse simpleUniverse = new SimpleUniverse();
+        simpleUniverse = new SimpleUniverse();
         locale = new Locale(simpleUniverse);
-       // BranchGroup vistas = new BranchGroup();
-        //vistas.addChild(getViewPlanta());
-        //simpleUniverse.getViewingPlatform().setNominalViewingTransform();
-        //locale.addBranchGraph(vistas);
+        
+        locale.addBranchGraph(vistas);
 
     }
     
-    public TransformGroup getViewPlanta(){
+    public void setViewPlanta(Canvas3D aCanvas){
         // TransformGroup para posicionar y orientar la vista
         Transform3D transformPlanta = new Transform3D ();
         transformPlanta.lookAt(new Point3d(0, 10, 0), new Point3d (0, 0, 0),
@@ -342,7 +340,7 @@ public class Universo {
         viewPlanta.addCanvas3D(aCanvas);
         viewPlanta.attachViewPlatform(vpPlanta);
         
-        return tgPlanta;
+        vistas.addChild(tgPlanta);
     }
     
     

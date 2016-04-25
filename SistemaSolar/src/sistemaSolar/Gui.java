@@ -85,7 +85,7 @@ public class Gui extends JFrame{
     public static void main(String[] args) {
         
         // *************** CANVAS
-        // Crear canvas (pantalla)
+        // Crear canvas
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvas2 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 
@@ -93,7 +93,7 @@ public class Gui extends JFrame{
              
         // *************** UNIVERSE
         // Crear Simple Universe
-        Universo universe = new Universo(new String(), canvas);
+        Universo universe = new Universo(new String());
         // Sale de nuestra propia clase
         universe.createUniverso();
         
@@ -145,15 +145,18 @@ public class Gui extends JFrame{
         
         ((Planeta)astros.get("tierra")).cloudEnabled(true, "src/texturas_planetas/cloud.png");
         
-        
+
+       universe.simpleUniverse.getViewingPlatform().setNominalViewingTransform();
 
        raiz.addChild(background);
        raiz.addChild(new Nave().getNaveBranch());
        raiz.compile();
        universe.locale.addBranchGraph(raiz);
-     /*  
+    
+       universe.setViewPlanta(canvas);
+       
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA);
-       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);*/
+       Gui windows2 = new Gui(canvas2, "Vistas", VISTAS);
     }
     
 }
