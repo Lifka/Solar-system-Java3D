@@ -322,7 +322,13 @@ public class Universo {
         vistas.addChild(node_view);
         locale.addBranchGraph(vistas);
     }
-    
+ /*
+    public void addPlatform(ViewingPlatform platform){
+        locale.removeBranchGraph(vistas);
+        vistas.addChild(platform);
+        locale.addBranchGraph(vistas);
+    }
+    */
     
     public BranchGroup createBackground(){
         

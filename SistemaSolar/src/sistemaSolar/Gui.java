@@ -51,13 +51,13 @@ public class Gui extends JFrame{
             JRadioButton nave = new JRadioButton("Nave");
             JRadioButton luna = new JRadioButton("Luna");
             JRadioButton perspectiva = new JRadioButton("Perspectiva", true);
-            camaras.getView(1).addCanvas3D(canvas);
+            camaras.getView(2).addCanvas3D(canvas);
             
             
             nave.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    camaras.getView(3).addCanvas3D(canvas);
+                    camaras.getView(2).addCanvas3D(canvas);
                 }
             });
             
@@ -71,7 +71,7 @@ public class Gui extends JFrame{
             perspectiva.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    camaras.getView(1).addCanvas3D(canvas);
+                    camaras.getView(2).addCanvas3D(canvas);
                 }
             });
             
@@ -192,8 +192,12 @@ public class Gui extends JFrame{
        
        Camaras camaras = new Camaras();
        
-       universe.addView(camaras.getViewPlanta());
-       universe.addView(camaras.getViewPerspective());
+       universe.addView(camaras.getViewPlanta());// 0
+       universe.addView(camaras.getViewPerspective(canvas2));// 1
+       
+       universe.addView(camaras.getViewPerspective(canvas2));// 2
+       universe.addView(camaras.getViewPerspective(canvas2));// 3
+
        
        Gui windows1 = new Gui(canvas, "Planta fija", PLANTA, camaras);
        Gui windows2 = new Gui(canvas2, "Vistas", VISTAS, camaras);
