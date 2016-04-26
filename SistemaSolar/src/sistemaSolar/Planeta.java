@@ -122,10 +122,10 @@ public class Planeta extends Astro{
             rota.addChild(value);
         }
                 
-        distance.addChild(rota);
-        distance.addChild(inclinacion);
-        traslada.addChild(distance);
-        addChild(traslada);
+        distance.addChild(rota); // Girar alrededor del sol
+        distance.addChild(inclinacion); // Inclinar
+        traslada.addChild(distance); // Distancia del sol
+        addChild(traslada); // Rotar sobre su eje
     }
     
     

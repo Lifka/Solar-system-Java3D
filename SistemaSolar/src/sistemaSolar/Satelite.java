@@ -53,10 +53,10 @@ public class Satelite extends Astro {
         TransformGroup traslada = getRotartransform(this.timer_traslacion, 1);
        
         
-        rota.addChild(esfera);
+        rota.addChild(esfera); // 
                 
-        distance.addChild(rota);
-        traslada.addChild(distance);
+        distance.addChild(rota); // Rotar alrededor planeta
+        traslada.addChild(distance); // Separar del planeta
         
         if(has_view){
             
@@ -75,7 +75,7 @@ public class Satelite extends Astro {
             view.attachViewPlatform(vpPlanta);
         }
             
-        addChild(traslada);
+        addChild(traslada); // Rota sobre su eje
     }
    
     
