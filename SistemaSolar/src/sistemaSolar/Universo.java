@@ -259,6 +259,7 @@ public class Universo {
     public void createUniverso(){
         simpleUniverse = new SimpleUniverse(null);
         simpleUniverse.getViewer().setVisible(false);
+        simpleUniverse.getViewer().getCanvas3D().setVisible(false);
         simpleUniverse.removeAllLocales();
         
         locale = new Locale(simpleUniverse);
