@@ -130,7 +130,7 @@ public class Planeta extends Astro{
     
     
     public void putOrbit(){
-        OrbitCircle orbita = new OrbitCircle(nombre, getDistancia(), material, Color.white);
+        OrbitCircle orbita = new OrbitCircle(getDistancia(), material);
         orbita.setPickable(false);
         addChild(orbita);
     }

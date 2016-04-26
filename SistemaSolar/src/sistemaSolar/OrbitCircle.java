@@ -22,19 +22,13 @@ public class OrbitCircle extends BranchGroup{
     String archivo_textura = "src/texturas_planetas/orbita.png";
     protected Primitive cilindro;
     protected Appearance apariencia;
-    
-    protected String nombre;
  
     protected double radio;
     
     protected Texture textura;
     protected Material material;
-    protected Color color;
     
-    protected double t_rotacion;
-    
-    public OrbitCircle(String nombre, Astro astro){
-        this.nombre = nombre;
+    public OrbitCircle(Astro astro){
         this.radio = astro.getDistancia();
         cilindro = new Cylinder();
         cilindro.getShape(0).setPickable(false);
@@ -43,15 +37,14 @@ public class OrbitCircle extends BranchGroup{
         this.setPickable(false);
     }
     
-    public OrbitCircle(String nombre, double radio, Material material, Color color){
+    public OrbitCircle(double radio, Material material){
         
-        this.nombre = nombre;
         this.radio = radio;
         
-        setApariencia(material, color);
+        setApariencia(material);
     }
     
-    public void setApariencia(Material material, Color color){
+    public void setApariencia(Material material){
         this.material = material;
         apariencia = new Appearance();
         

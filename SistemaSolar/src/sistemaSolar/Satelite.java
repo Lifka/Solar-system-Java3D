@@ -6,10 +6,7 @@
  */
 package sistemaSolar;
 
-import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Material;
-import javax.media.j3d.PhysicalBody;
-import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
